@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LogisticCenter.MainPage">
 
-    <VerticalStackLayout Spacing="20">
+        <VerticalStackLayout Spacing="20">
         
         <Label Text="Регистрация"
            FontFamily="Open Sans"
@@ -24,7 +24,8 @@
                 StrokeShape="RoundRectangle 10"
                 HorizontalOptions="Center">
 
-                <Entry Placeholder="Введите имя пользователя:" 
+                <Entry Text="{Binding Username}"
+                   Placeholder="Введите имя пользователя:" 
                    PlaceholderColor="Gray"
                    TextColor="White"
                    FontAutoScalingEnabled="True"
@@ -40,7 +41,8 @@
         </VerticalStackLayout>
 
         <VerticalStackLayout HorizontalOptions="Center" Spacing="10">
-            <Label Text="Почта"
+            <Label 
+               Text="Почта"
                FontFamily="Open Sans"
                FontSize="24"
                TextColor="MediumPurple"
@@ -51,7 +53,8 @@
                 StrokeShape="RoundRectangle 10"
                 HorizontalOptions="Center">
 
-                <Entry Placeholder="Введите почту:" 
+                <Entry Text="{Binding Useremail}"
+                    Placeholder="Введите почту:" 
                    PlaceholderColor="Gray"
                    TextColor="White"
                    FontAutoScalingEnabled="True"
@@ -78,7 +81,8 @@
                 StrokeShape="RoundRectangle 10"
                 HorizontalOptions="Center">
 
-                <Entry IsPassword="True"
+                <Entry Text="{Binding Userpassword}"
+                   IsPassword="True"
                    Placeholder="Введите пароль:" 
                    PlaceholderColor="Gray"
                    TextColor="White"
@@ -95,17 +99,50 @@
         </VerticalStackLayout>
 
         <VerticalStackLayout HorizontalOptions="Center">
-            
-            <Button Margin="10"
+
+            <Button Command="{Binding RegistrationCommand}"
+               Margin="10"
                Text="Подвердить регистрацию"
                FontFamily="Open Sans"
-               FontSize="Caption"
+               FontSize="Small"
                TextColor="White"
                BackgroundColor="MediumPurple"
                WidthRequest="500"
-               HeightRequest="50"/>
+               HeightRequest="50" IsEnabled="True"/>
             
+            <Label Text="{Binding RegResponse}"
+                FontFamily="Open Sans"
+                FontSize="16"
+                TextColor="MediumPurple"
+                HorizontalOptions="Center" />
+
         </VerticalStackLayout>
+
+        <!--<VerticalStackLayout Spacing="20">
+
+            <Label x:Name="UsersLabel"
+           Text="Список пользователей"
+           FontFamily="Open Sans"
+           FontSize="16"
+           TextColor="MediumPurple"
+           HorizontalOptions="Center" />
+
+            <ScrollView Padding="20">
+                <CollectionView ItemsSource="{Binding Users}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10">
+                                <StackLayout>
+                                    <Label Text="{Binding Name}" FontSize="12"></Label>
+                                    <Label Text="{Binding Email}" FontSize="10"></Label>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+
+        </VerticalStackLayout>-->
 
     </VerticalStackLayout>
 

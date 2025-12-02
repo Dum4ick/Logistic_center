@@ -1,18 +1,21 @@
-﻿namespace LogisticCenter
+﻿using LogisticCenter.ViewModels;
+using MySql.Data.MySqlClient;
+using System.Data;
+using System.Text;
+using System.Text.Json;
+
+namespace LogisticCenter
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
 
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new RegViewModel();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-            
-        }
+        
     }
 
 }
