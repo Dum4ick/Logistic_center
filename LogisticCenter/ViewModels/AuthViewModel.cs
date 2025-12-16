@@ -2,10 +2,11 @@
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+using LogisticCenter.Data;
 
 namespace LogisticCenter
 {
-    public partial class GetUserViewModel : ObservableObject
+    public partial class AuthViewModel : ObservableObject
     {
         //[ObservableProperty]
 
@@ -16,7 +17,7 @@ namespace LogisticCenter
 
         private readonly ApiData apiData;
 
-        public GetUserViewModel()
+        public AuthViewModel()
         {
             apiData = new ApiData();
             //LoadUsers();
@@ -26,7 +27,7 @@ namespace LogisticCenter
         private async void LoadUsers()
         {
             var userList = await apiData.GetUsers();
-            Users = new ObservableCollection<UserModel>(userList);
+            //Users = new ObservableCollection<UserModel>(userList);
         }
 
     }

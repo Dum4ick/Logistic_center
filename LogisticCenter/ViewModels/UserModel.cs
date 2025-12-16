@@ -10,16 +10,9 @@ namespace LogisticCenter
         public string Name { get; set; }
         [JsonPropertyName("email")]
         public string Email { get; set; }
-        [JsonPropertyName("password")]
+        [JsonIgnore]
         public string Password { get; set; }
-    }
-
-    public class DataModel
-    {
-        [JsonPropertyName("status")]
-        public string Response { get; set; }
-
-        [JsonPropertyName("data")]
-        public List<UserModel> UsersList { get; set; }
+        [JsonPropertyName("role_id")]
+        public int RoleId { get; set; }
     }
 }

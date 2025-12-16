@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LogisticCenter.LoginPage"
+             BackgroundColor="#121212">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20,40,20,20">
+
+            <Label Text="Вход в систему"
+                   FontFamily="Open Sans"
+                   FontSize="36"
+                   TextColor="MediumPurple"
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"/>
+
+            <!-- Почта -->
+            <VerticalStackLayout Spacing="8" MaximumWidthRequest="600">
+                <Label Text="Почта"
+                       FontFamily="Open Sans"
+                       FontSize="18"
+                       TextColor="MediumPurple"
+                       HorizontalOptions="Start"/>
+                <Border Stroke="MediumPurple"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 10"
+                        HorizontalOptions="Fill">
+                    <Entry Text="{Binding Email}"
+                           Placeholder="Введите почту"
+                           TextColor="White"
+                           Keyboard="Email"
+                           HeightRequest="50"
+                           HorizontalOptions="Fill"
+                           Margin="10,0"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Пароль -->
+            <VerticalStackLayout Spacing="8" MaximumWidthRequest="600">
+                <Label Text="Пароль"
+                       FontFamily="Open Sans"
+                       FontSize="18"
+                       TextColor="MediumPurple"
+                       HorizontalOptions="Start"/>
+                <Border Stroke="MediumPurple"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 10"
+                        HorizontalOptions="Fill">
+                    <Entry Text="{Binding Password}"
+                           IsPassword="True"
+                           Placeholder="Введите пароль"
+                           TextColor="White"
+                           HeightRequest="50"
+                           HorizontalOptions="Fill"
+                           Margin="10,0"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Кнопки -->
+            <VerticalStackLayout Spacing="10" MaximumWidthRequest="600" HorizontalOptions="Center">
+                <Button Text="Войти"
+                        Command="{Binding LoginCommand}"
+                        BackgroundColor="MediumPurple"
+                        TextColor="White"
+                        HeightRequest="50"
+                        CornerRadius="10"
+                        HorizontalOptions="Fill"/>
+
+                <Button Text="Нет аккаута? Регистрация"
+                        Command="{Binding GoToRegisterCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="MediumPurple"
+                        HeightRequest="50"
+                        HorizontalOptions="Fill"/>
+
+                <Label Text="{Binding LoginResponse}"
+                       FontFamily="Open Sans"
+                       FontSize="14"
+                       TextColor="MediumPurple"
+                       HorizontalOptions="Center"
+                       LineBreakMode="WordWrap"
+                       MaxLines="3"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

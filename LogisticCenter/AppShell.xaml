@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="LogisticCenter.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:LogisticCenter"
-    Shell.FlyoutBehavior="Disabled"
-    Title="LogisticCenter">
+    x:Class="LogisticCenter.AppShell">
 
     <ShellContent
-        Title="Home"
+        Title="Login"
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="login" />
+
+    <ShellContent
+        Title="Register"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Route="register" />
+
+    <ShellContent
+        Title="Main"
+        ContentTemplate="{DataTemplate local:MainMenuPage}"
+        Route="main" />
 
 </Shell>

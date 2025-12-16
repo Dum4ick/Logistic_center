@@ -1,43 +1,82 @@
-﻿using LogisticCenter;
-using MySqlX.XDevAPI.Common;
-using Org.BouncyCastle.Security;
-using System;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using System.Text.Json;
+
+namespace LogisticCenter.Data;
 
 public class ApiData
 {
-	private readonly HttpClient _httpClient;
+    //HttpClient для отправки запросов к серверу
+    private readonly HttpClient _httpClient;
 
-	public ApiData()
-	{
-		_httpClient = new HttpClient();
-	}
-
-	public async Task<List<UserModel>> GetUsers()
-	{
-		string url = "http://f1196925.xsph.ru/get_users.php";
-
-		try
-		{
-			var response = await _httpClient.GetStringAsync(url);
-            var result = JsonSerializer.Deserialize<DataModel>(response);
-            return result?.UsersList ?? new List<UserModel>();
-        }
-
-		catch
-		{
-			return new List<UserModel>();
-		}
-
-	}
-
-    public async Task<string> RegisterUser(UserModel user)
+    public ApiData()
     {
-        string url = "http://f1196925.xsph.ru/reg.php";
+        //Создаём HttpClient
+        _httpClient = new HttpClient();
+    }
+
+    // Получение списка всех пользователей с сервера
+    public async Task<List<UserModel>> GetUsers()
+    {
+        //Подключение скрипта для получения спискка пользвоателей
+        const string url = "http://f1196925.xsph.ru/get_users.php";
 
         try
         {
+            //Отправляем GET запрос на сервер
+            var response = await _httpClient.GetAsync(url);
+
+            //Получаем ответ и преобразуем JSON в объект ApiResponse где User это список пользователей
+            var result = await response.Content.ReadFromJsonAsync<ApiResponse<List<UserModel>>>();
+
+            //Если result или result.User раняется null то возвращаем пустой список, иначе возваращаем result.User
+            return result?.User ?? new List<UserModel>();
+        }
+        catch
+        {
+            //Если чтото не так то просто возвращаем пустой список
+            return new List<UserModel>();
+        }
+    }
+
+    //Авторизация пользователя
+    public async Task<(bool success, UserModel user, string message)> LoginAsync(string email, string password)
+    {
+        //Подключение скрипта для авторизации пользвоателей
+        const string url = "http://f1196925.xsph.ru/login.php";
+
+        try
+        {
+            //Отправляем POST запрос с email и паролем
+            var response = await _httpClient.PostAsJsonAsync(url, new
+            {
+                email,
+                password
+            });
+
+            //Читаем ответ сервера и преобразуем JSON в ApiResponse<UserModel>
+            var result = await response.Content.ReadFromJsonAsync<ApiResponse<UserModel>>();
+
+            // Если статус success и result не null то возвращаем что вход удался
+            if (result?.Status == "success") return (true, result.User, null);
+
+            //Если сервер вернул ошибку то выводим ошибку
+            return (false, null, result?.Message ?? "Ошибка входа");
+        }
+        catch (Exception ex)
+        {
+            return (false, null, ex.Message);
+        }
+    }
+
+    //Регистрация нового пользователя
+    public async Task<string> RegisterUser(UserModel user)
+    {
+        //Подключение скрипта для регистрации пользвоателей
+        const string url = "http://f1196925.xsph.ru/reg.php";
+
+        try
+        {
+            //Отправляем POST запрос с данными пользователя
             var response = await _httpClient.PostAsJsonAsync(url, new
             {
                 username = user.Name,
@@ -45,21 +84,18 @@ public class ApiData
                 password = user.Password
             });
 
-            var content = await response.Content.ReadAsStringAsync();
+            //Читаем ответ сервера
+            var result = await response.Content.ReadFromJsonAsync<ApiResponse<object>>();
 
-            var result = JsonSerializer.Deserialize<Dictionary<string, string>>(content);
+            //Если сервер вернул статус ok то регистрация прошла успешно
+            if (result != null && result.Status == "ok") return "Регистрация прошла успешно";
 
-            if (result != null && result.ContainsKey("status"))
-            {
-                return result.ContainsKey("message") ? result["message"] : "Ответ сервера без сообщения";
-            }
-
-            return "Не удалось зарегистрировать пользователя: некорректный ответ сервера";
+            //Возвращаем сообщение ошибки от сервера
+            return result?.Message ?? "Ошибка регистрации";
         }
         catch (Exception ex)
         {
-            return $"Ошибка при регистрации: {ex.Message}";
+            return $"Ошибка сети: {ex.Message}";
         }
     }
-
 }

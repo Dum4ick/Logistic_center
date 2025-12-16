@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LogisticCenter.MainPage"
+             BackgroundColor="#121212">
+
+    <ScrollView>
+        <VerticalStackLayout 
+            Spacing="20" 
+            Padding="20,40,20,20">
+
+            <Label Text="Регистрация"
+                   FontFamily="Open Sans"
+                   FontSize="36"
+                   TextColor="MediumPurple"
+                   HorizontalOptions="Center" 
+                   HorizontalTextAlignment="Center"/>
+
+            <!-- Имя пользователя -->
+            <VerticalStackLayout Spacing="8" MaximumWidthRequest="600">
+                <Label Text="Имя пользователя"
+                       FontFamily="Open Sans"
+                       FontSize="18"
+                       TextColor="MediumPurple"
+                       HorizontalOptions="Start"/>
+
+                <Border Stroke="MediumPurple"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 10"
+                        HorizontalOptions="Fill">
+
+                    <Entry Text="{Binding Username}"
+                           Placeholder="Введите имя пользователя:" 
+                           PlaceholderColor="Gray"
+                           TextColor="White"
+                           FontAutoScalingEnabled="True"
+                           ClearButtonVisibility="WhileEditing"
+                           HeightRequest="50"
+                           BackgroundColor="Transparent"
+                           HorizontalOptions="Fill" 
+                           Margin="10,0"/>
+
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Почта -->
+            <VerticalStackLayout Spacing="8" MaximumWidthRequest="600">
+                <Label Text="Почта"
+                       FontFamily="Open Sans"
+                       FontSize="18"
+                       TextColor="MediumPurple"
+                       HorizontalOptions="Start"/>
+
+                <Border Stroke="MediumPurple"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 10"
+                        HorizontalOptions="Fill">
+
+                    <Entry Text="{Binding Useremail}"
+                           Placeholder="Введите почту:" 
+                           PlaceholderColor="Gray"
+                           TextColor="White"
+                           Keyboard="Email"
+                           FontAutoScalingEnabled="True"
+                           ClearButtonVisibility="WhileEditing"
+                           HeightRequest="50"
+                           BackgroundColor="Transparent"
+                           HorizontalOptions="Fill" 
+                           Margin="10,0"/>
+
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Пароль -->
+            <VerticalStackLayout Spacing="8" MaximumWidthRequest="600">
+                <Label Text="Пароль"
+                       FontFamily="Open Sans"
+                       FontSize="18"
+                       TextColor="MediumPurple"
+                       HorizontalOptions="Start"/>
+
+                <Border Stroke="MediumPurple"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 10"
+                        HorizontalOptions="Fill">
+
+                    <Entry Text="{Binding Userpassword}"
+                           IsPassword="True"
+                           Placeholder="Введите пароль:" 
+                           PlaceholderColor="Gray"
+                           TextColor="White"
+                           FontAutoScalingEnabled="True"
+                           ClearButtonVisibility="WhileEditing"
+                           HeightRequest="50"
+                           BackgroundColor="Transparent"
+                           HorizontalOptions="Fill" 
+                           Margin="10,0"/>
+
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Кнопка регистрации -->
+            <VerticalStackLayout 
+                Spacing="10" 
+                VerticalOptions="End"
+                Margin="0,20,0,0"
+                MaximumWidthRequest="600">
+
+                <Button Command="{Binding RegistrationCommand}"
+                       Text="Подтвердить регистрацию"
+                       FontFamily="Open Sans"
+                       FontSize="16"
+                       TextColor="White"
+                       BackgroundColor="MediumPurple"
+                       HeightRequest="50"
+                       CornerRadius="10"
+                       HorizontalOptions="Fill"
+                       Margin="0,0,0,10"/>
+
+                <Button Text="Уже есть аккаунт? Войти"
+                    Command="{Binding GoToLoginCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="MediumPurple"
+                    HorizontalOptions="Center"/>
+
+
+                <Label Text="{Binding RegResponse}"
+                       FontFamily="Open Sans"
+                       FontSize="14"
+                       TextColor="MediumPurple"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       LineBreakMode="WordWrap"
+                       MaxLines="3"/>
+                
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
