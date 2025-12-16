@@ -13,6 +13,6 @@ namespace LogisticCenter
         [JsonIgnore]
         public string Password { get; set; }
         [JsonPropertyName("role_id")]
-        public int RoleId { get; set; }
+        public string RoleId { get; set; }
     }
 }

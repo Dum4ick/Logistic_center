@@ -29,7 +29,8 @@ public class ApiData
             var result = await response.Content.ReadFromJsonAsync<ApiResponse<List<UserModel>>>();
 
             //Если result или result.User раняется null то возвращаем пустой список, иначе возваращаем result.User
-            return result?.User ?? new List<UserModel>();
+            return result?.Data ?? new List<UserModel>();
+
         }
         catch
         {

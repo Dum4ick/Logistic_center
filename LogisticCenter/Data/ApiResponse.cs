@@ -17,6 +17,10 @@ namespace LogisticCenter.Data
 
         [JsonPropertyName("user")]
         public T User { get; set; }
+
+        [JsonPropertyName("data")]
+        public T Data { get; set; }
     }
+
 
 }
