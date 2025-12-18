@@ -13,11 +13,14 @@ namespace LogisticCenter.ViewModels
 {
     public partial class RegViewModel : ObservableObject
     {
+        //Логин должен содержать от 6 до 50 символов.
+        //Разрешены только латинские буквы и цифры.
         public static readonly Regex LoginRegex = new(
-            @"^[a-zA-Z_.-]{6,50}$",
+            @"^[a-zA-Z0-9_.-]{6,50}$",
             RegexOptions.Compiled);
 
-        // Email: простой и рабочий вариант
+
+        // Email: логин@домен.ru
         public static readonly Regex EmailRegex = new(
             @"^[\w.-]+@[\w.-]+\.[A-Za-z]{2,}$",
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -62,17 +65,18 @@ namespace LogisticCenter.ViewModels
         {
             if (!IsLoginValid(username_))
             {
-                RegResponse = "Имя пользователя введено неправильно!";
+                RegResponse = "Имя пользователя введено неправильно! Логин должен содержать от 6 до 50 символов.\n" +
+                    "Разрешены только латинские буквы и цифры.";
                 return false;
             }
             else if (!IsEmailValid(email_))
             {
-                RegResponse = "Почта введена неправильно!";
+                RegResponse = "Почта введена неправильно! Формат должен быть: логин@домен.ru";
                 return false;
             }
             else if (!IsPasswordValid(password_))
             {
-                RegResponse = "Пароль введён неправильно!";
+                RegResponse = "Пароль введён неправильно! Минимум 8 символов, буква(латиица), цифра, спецсимвол";
                 return false;
             }
             else 
@@ -81,6 +85,12 @@ namespace LogisticCenter.ViewModels
                 return true; 
             }
             
+        }
+
+        [RelayCommand]
+        async Task GoToLogin()
+        {
+            await Shell.Current.GoToAsync("//login");
         }
 
         public static bool IsLoginValid(string login) =>
