@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using LogisticCenter.Data;
+using LogisticCenter.Services;
 
 namespace LogisticCenter.ViewModels
 {
@@ -58,6 +59,19 @@ namespace LogisticCenter.ViewModels
 
             var resultMessage = await api.RegisterUser(user);
             RegResponse = resultMessage;
+
+            if (resultMessage == "OK")
+            {
+                var (success, loggedUser, _) =
+                    await api.LoginAsync(Useremail, Userpassword);
+
+                if (success)
+                {
+                    UserSession.Instance.SetUser(loggedUser);
+                    await Shell.Current.GoToAsync("//main");
+                }
+            }
+
 
         }
 

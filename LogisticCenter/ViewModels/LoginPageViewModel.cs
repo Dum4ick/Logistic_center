@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LogisticCenter.Data;
+using LogisticCenter.Services;
+using LogisticCenter.ViewModels;
 
 namespace LogisticCenter.ViewModels;
 
@@ -21,10 +23,14 @@ public partial class LoginPageViewModel : ObservableObject
     [RelayCommand]
     async Task Login()
     {
-        var (success, user, message) = await _apiData.LoginAsync(Email, Password);
+        var (success, user, message) =
+            await _apiData.LoginAsync(Email, Password);
 
         if (success)
         {
+            // ✅ сохраняем пользователя
+            UserSession.Instance.SetUser(user);
+
             await Shell.Current.GoToAsync("//main");
         }
         else

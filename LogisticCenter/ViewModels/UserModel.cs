@@ -14,5 +14,7 @@ namespace LogisticCenter
         public string Password { get; set; }
         [JsonPropertyName("role_id")]
         public string RoleId { get; set; }
+        [JsonPropertyName("full_name")]
+        public string FullName { get; set; }
     }
 }
