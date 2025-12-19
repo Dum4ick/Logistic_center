@@ -2,38 +2,201 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LogisticCenter.MainMenuPage"
-             BackgroundColor="#121212">
+             BackgroundColor="#0B0B0F">
 
-    <VerticalStackLayout Spacing="20" Padding="20">
+    <Grid ColumnDefinitions="240,*">
 
-        <Label Text="Главное меню"
-               FontFamily="Open Sans"
-               FontSize="36"
-               TextColor="MediumPurple"
-               HorizontalOptions="Center"
-               HorizontalTextAlignment="Center"/>
+        <!-- ===== ЛЕВАЯ ПАНЕЛЬ ===== -->
+        <Border Grid.Column="0"
+                Margin="10"
+                Stroke="#8B5CF6"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 20"
+                BackgroundColor="#14141A">
 
-        <Button Text="Профиль"
-                BackgroundColor="MediumPurple"
-                TextColor="White"
-                HeightRequest="50"
-                CornerRadius="10"
-                HorizontalOptions="Fill"/>
+            <VerticalStackLayout Padding="20" Spacing="16">
 
-        <Button Text="Настройки"
-                BackgroundColor="MediumPurple"
-                TextColor="White"
-                HeightRequest="50"
-                CornerRadius="10"
-                HorizontalOptions="Fill"/>
+                <!-- Название -->
+                <Label Text="LOGISTIC CENTER"
+                       FontSize="18"
+                       FontAttributes="Bold"
+                       TextColor="#8B5CF6"
+                       HorizontalOptions="Center"/>
 
-        <Button Text="Выход"
-                BackgroundColor="MediumPurple"
-                TextColor="White"
-                HeightRequest="50"
-                CornerRadius="10"
-                HorizontalOptions="Fill"
-                Clicked="Logout_Clicked"/>
+                <BoxView HeightRequest="1"
+                         Color="#2A2A36"/>
 
-    </VerticalStackLayout>
+                <!-- Навигация -->
+                <Button Text="📦  Товары"
+                        BackgroundColor="#1C1C26"
+                        TextColor="White"
+                        CornerRadius="16"/>
+
+                <Button Text="🧾  Заказы"
+                        BackgroundColor="#1C1C26"
+                        TextColor="White"
+                        CornerRadius="16"/>
+
+                <Button Text="📊  Остатки"
+                        BackgroundColor="#1C1C26"
+                        TextColor="White"
+                        CornerRadius="16"/>
+
+                <Button Text="🏭  Склады"
+                        BackgroundColor="#1C1C26"
+                        TextColor="White"
+                        CornerRadius="16"/>
+
+                <Button Text="👤  Пользователи"
+                        BackgroundColor="#1C1C26"
+                        TextColor="White"
+                        CornerRadius="16"/>
+
+                <Button Text="📈  Отчёты"
+                        BackgroundColor="#1C1C26"
+                        TextColor="White"
+                        CornerRadius="16"/>
+
+                <BoxView HeightRequest="1"
+                         Color="#2A2A36"/>
+
+                <Button Command="{Binding Logout_ClickedCommand}"
+                        Text="🚪  Выход"
+                        BackgroundColor="#8B5CF6"
+                        TextColor="White"
+                        CornerRadius="16"/>
+
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- ===== ОСНОВНАЯ ОБЛАСТЬ ===== -->
+        <Border Grid.Column="1"
+                Margin="10"
+                Stroke="#8B5CF6"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 20"
+                BackgroundColor="#14141A">
+
+            <Grid Padding="24" RowDefinitions="Auto,*">
+
+                <!-- Шапка -->
+                <Grid ColumnDefinitions="*,Auto">
+                    
+                    <Label Text="Панель администратора"
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       VerticalOptions="Center"/>
+
+                    <Label Text="Добро пожаловать, Admin"
+                       Grid.Column="1"
+                       TextColor="#8B5CF6"
+                       FontAttributes="Bold"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"/>
+                    
+                </Grid>
+
+
+                <!-- Карточки -->
+                <Grid Grid.Row="1"
+                      Margin="0,28,0,0"
+                      ColumnDefinitions="*,*,*"
+                      RowDefinitions="*,*"
+                      ColumnSpacing="20"
+                      RowSpacing="20">
+
+                    <!-- Карточка -->
+                    <Border BackgroundColor="#1C1C26"
+                            Stroke="#8B5CF6"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20">
+                        <VerticalStackLayout Padding="20">
+                            <Label Text="📦 Товары"
+                                   FontSize="18"
+                                   TextColor="White"/>
+                            <Label Text="Управление каталогом"
+                                   TextColor="#C7C7D1"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            BackgroundColor="#1C1C26"
+                            Stroke="#8B5CF6"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20">
+                        <VerticalStackLayout Padding="20">
+                            <Label Text="🧾 Заказы"
+                                   FontSize="18"
+                                   TextColor="White"/>
+                            <Label Text="Контроль заказов"
+                                   TextColor="#C7C7D1"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="2"
+                            BackgroundColor="#1C1C26"
+                            Stroke="#8B5CF6"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20">
+                        <VerticalStackLayout Padding="20">
+                            <Label Text="📊 Остатки"
+                                   FontSize="18"
+                                   TextColor="White"/>
+                            <Label Text="Складской учёт"
+                                   TextColor="#C7C7D1"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            BackgroundColor="#1C1C26"
+                            Stroke="#8B5CF6"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20">
+                        <VerticalStackLayout Padding="20">
+                            <Label Text="👤 Пользователи"
+                                   FontSize="18"
+                                   TextColor="White"/>
+                            <Label Text="Роли и доступ"
+                                   TextColor="#C7C7D1"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="1"
+                            BackgroundColor="#1C1C26"
+                            Stroke="#8B5CF6"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20">
+                        <VerticalStackLayout Padding="20">
+                            <Label Text="🚚 Отгрузки"
+                                   FontSize="18"
+                                   TextColor="White"/>
+                            <Label Text="Доставка"
+                                   TextColor="#C7C7D1"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Row="1"
+                            Grid.Column="2"
+                            BackgroundColor="#1C1C26"
+                            Stroke="#8B5CF6"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20">
+                        <VerticalStackLayout Padding="20">
+                            <Label Text="📈 Отчёты"
+                                   FontSize="18"
+                                   TextColor="White"/>
+                            <Label Text="Аналитика"
+                                   TextColor="#C7C7D1"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                </Grid>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+
 </ContentPage>
