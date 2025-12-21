@@ -26,8 +26,6 @@
                            TextColor="#8B5CF6"
                            HorizontalOptions="Center"/>
 
-                    <BoxView HeightRequest="2" Color="#2A2A36" WidthRequest="240"/>
-
                     <Button Text="📦  Товары"
                             BackgroundColor="#1C1C26"
                             TextColor="White"
@@ -51,7 +49,8 @@
                     <Button Text="👤  Пользователи"
                             BackgroundColor="#1C1C26"
                             TextColor="White"
-                            CornerRadius="16"/>
+                            CornerRadius="16"
+                            Command="{Binding GoToUsersCommand}"/>
 
                 <Button Text="📈  Отчёты"
                             BackgroundColor="#1C1C26"

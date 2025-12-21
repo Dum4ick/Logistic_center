@@ -53,9 +53,26 @@ namespace LogisticCenter.ViewModels
         async Task Logout_Clicked()
         {
             IsProfileMenuVisible = false;
-            UserSession.Instance.Clear();
 
+            bool confirm = await Shell.Current.DisplayAlert(
+                "Выход из аккаунта",
+                "Вы действительно хотите выйти?",
+                "Да",
+                "Отмена");
+
+            if (!confirm)
+                return;
+
+            UserSession.Instance.Clear();
             await Shell.Current.GoToAsync("//login");
         }
+
+
+        [RelayCommand]
+        async Task GoToUsers()
+        {
+            await Shell.Current.GoToAsync("//users");
+        }
+
     }
 }
