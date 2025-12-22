@@ -219,6 +219,7 @@
                      Margin="0,10"/>
 
                     <Button Text="Назначить имя"
+                    Command="{Binding SetFullNameCommand}"
                     BackgroundColor="#1C1C26"
                     TextColor="White"
                     CornerRadius="14"/>

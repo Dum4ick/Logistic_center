@@ -109,7 +109,7 @@ public class ApiData
         {
             var response = await _httpClient.PostAsJsonAsync(url, new
             {
-                user_id = userId,
+                id = userId,
                 full_name = fullName
             });
 

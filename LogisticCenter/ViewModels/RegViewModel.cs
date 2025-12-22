@@ -50,6 +50,7 @@ namespace LogisticCenter.ViewModels
                 return;
 
             var api = new ApiData();
+
             var user = new UserModel
             {
                 Name = Username,

@@ -6,17 +6,6 @@
     x:Class="LogisticCenter.AppShell">
 
     <ShellContent
-        Title="Users"
-        ContentTemplate="{DataTemplate local:UsersPage}"
-        Route="users"/>
-    
-    <ShellContent
-        Title="Main"
-        ContentTemplate="{DataTemplate local:MainMenuPage}"
-        Route="main" />
-
-
-    <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="login" />
@@ -26,6 +15,14 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="register" />
 
-    
+    <ShellContent
+        Title="Main"
+        ContentTemplate="{DataTemplate local:MainMenuPage}"
+        Route="main" />
+
+    <ShellContent
+        Title="Users"
+        ContentTemplate="{DataTemplate local:UsersPage}"
+        Route="users"/>
 
 </Shell>

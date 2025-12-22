@@ -12,7 +12,8 @@
             <Label Text="Регистрация"
                    FontFamily="Open Sans"
                    FontSize="36"
-                   TextColor="MediumPurple"
+                   TextColor="#00cccc"
+                   FontAttributes="Bold"
                    HorizontalOptions="Center" 
                    HorizontalTextAlignment="Center"/>
 
@@ -21,10 +22,10 @@
                 <Label Text="Имя пользователя"
                        FontFamily="Open Sans"
                        FontSize="18"
-                       TextColor="MediumPurple"
+                       TextColor="#00cccc"
                        HorizontalOptions="Start"/>
 
-                <Border Stroke="MediumPurple"
+                <Border Stroke="#00cccc"
                         StrokeThickness="2"
                         StrokeShape="RoundRectangle 10"
                         HorizontalOptions="Fill">
@@ -48,10 +49,10 @@
                 <Label Text="Почта"
                        FontFamily="Open Sans"
                        FontSize="18"
-                       TextColor="MediumPurple"
+                       TextColor="#00cccc"
                        HorizontalOptions="Start"/>
 
-                <Border Stroke="MediumPurple"
+                <Border Stroke="#00cccc"
                         StrokeThickness="2"
                         StrokeShape="RoundRectangle 10"
                         HorizontalOptions="Fill">
@@ -76,10 +77,10 @@
                 <Label Text="Пароль"
                        FontFamily="Open Sans"
                        FontSize="18"
-                       TextColor="MediumPurple"
+                       TextColor="#00cccc"
                        HorizontalOptions="Start"/>
 
-                <Border Stroke="MediumPurple"
+                <Border Stroke="#00cccc"
                         StrokeThickness="2"
                         StrokeShape="RoundRectangle 10"
                         HorizontalOptions="Fill">
@@ -111,7 +112,7 @@
                        FontFamily="Open Sans"
                        FontSize="16"
                        TextColor="White"
-                       BackgroundColor="MediumPurple"
+                       BackgroundColor="#00cccc"
                        HeightRequest="50"
                        CornerRadius="10"
                        HorizontalOptions="Fill"
@@ -120,14 +121,14 @@
                 <Button Text="Уже есть аккаунт? Войти"
                     Command="{Binding GoToLoginCommand}"
                     BackgroundColor="Transparent"
-                    TextColor="MediumPurple"
+                    TextColor="#00cccc"
                     HorizontalOptions="Center"/>
 
 
                 <Label Text="{Binding RegResponse}"
                        FontFamily="Open Sans"
                        FontSize="14"
-                       TextColor="MediumPurple"
+                       TextColor="#00cccc"
                        HorizontalOptions="Center"
                        HorizontalTextAlignment="Center"
                        LineBreakMode="WordWrap"
