@@ -7,85 +7,124 @@
     <Grid Padding="20" RowDefinitions="Auto,Auto,*" RowSpacing="16">
 
         <!-- ===== ЗАГОЛОВОК ===== -->
-        <!-- ===== ЗАГОЛОВОК ===== -->
+
         <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
 
-            <Button Text="⬅"
-            Command="{Binding GoBackCommand}"
-            BackgroundColor="#1C1C26"
-            BorderColor="#8B5CF6"
-            BorderWidth="1"
-            TextColor="White"
-            CornerRadius="12"
-            WidthRequest="44"
-            HeightRequest="44"/>
+            <Label Grid.Column="0"
+                Text="Пользователи"
+                FontSize="26"
+                FontAttributes="Bold"
+                TextColor="White"
+                VerticalOptions="Center"
+                Margin="12,0,0,0"/>
 
-            <Label Grid.Column="1"
-           Text="👤 Пользователи"
-           FontSize="26"
-           FontAttributes="Bold"
-           TextColor="White"
-           VerticalOptions="Center"
-           Margin="12,0,0,0"/>
+            <Button Grid.Column="1"
+                Text='↩ Вернуться'
+                FontAttributes="Bold"
+                Command="{Binding GoBackCommand}"
+                BackgroundColor="#1C1C26"
+                BorderColor="#00cccc"
+                BorderWidth="2"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="44"
+                HorizontalOptions="End"/>
+            
         </Grid>
 
 
         <!-- ===== КНОПКИ ДЕЙСТВИЙ ===== -->
-        <HorizontalStackLayout Grid.Row="1" Spacing="12">
+        <FlexLayout Grid.Row="1"
+            Wrap="Wrap"
+            Direction="Row"
+            AlignItems="Center"
+            JustifyContent="Start">
 
-            <Button Text="➕ Добавить"
-                    Command="{Binding AddUserCommand}"
-                    BackgroundColor="#8B5CF6"
-                    TextColor="White"
-                    CornerRadius="14"/>
+        <!-- ПОИСК -->
+        <Border Padding="10"
+                BackgroundColor="#1C1C26"
+                Stroke="#00cccc"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 10"
+                FlexLayout.Basis="300"
+                FlexLayout.Grow="1"
+                HeightRequest="50">
 
-            <Button Text="✏ Редактировать"
-                    Command="{Binding EditUserCommand}"
-                    BackgroundColor="#1C1C26"
-                    BorderColor="#8B5CF6"
-                    BorderWidth="1"
-                    TextColor="White"
-                    CornerRadius="14"/>
+            <Grid ColumnDefinitions="Auto,*">
+                
+                <Label Text="🔍"
+                       FontSize="18"
+                       TextColor="#00cccc"
+                       VerticalOptions="Center"/>
 
-            <Button Text="🛡 Назначить роль"
-                    Command="{Binding AssignRoleCommand}"
-                    BackgroundColor="#1C1C26"
-                    BorderColor="#8B5CF6"
-                    BorderWidth="1"
-                    TextColor="White"
-                    CornerRadius="14"/>
+                <Entry Grid.Column="1"
+                       Placeholder="Поиск по имени, email или роли"
+                       Text="{Binding SearchText}"
+                       TextColor="White"
+                       PlaceholderColor="#777"
+                       BackgroundColor="Transparent"
+                       ClearButtonVisibility="WhileEditing"
+                       HeightRequest="50"/>
+                
+            </Grid>
+    </Border>
 
-            <Button Text="⛔ Заблокировать"
-                    Command="{Binding BlockUserCommand}"
-                    BackgroundColor="#1C1C26"
-                    BorderColor="#FF4D4D"
-                    BorderWidth="1"
-                    TextColor="White"
-                    CornerRadius="14"/>
+    <!-- КНОПКИ -->
+    <Button Text="Добавить"
+            Command="{Binding AddUserCommand}"
+            BackgroundColor="#00cccc"
+            TextColor="White"
+            CornerRadius="10"/>
 
-            <Button Text="🗑 Удалить"
-                    Command="{Binding DeleteUserCommand}"
-                    BackgroundColor="#FF4D4D"
-                    TextColor="White"
-                    CornerRadius="14"/>
+    <Button Text="Редактировать"
+            Command="{Binding EditUserCommand}"
+            BackgroundColor="#1C1C26"
+            BorderColor="#00cccc"
+            TextColor="White"
+            CornerRadius="10"/>
 
-        </HorizontalStackLayout>
+    <Button Text="Назначить роль"
+            Command="{Binding AssignRoleCommand}"
+            BackgroundColor="#1C1C26"
+            BorderColor="#00cccc"
+            TextColor="White"
+            CornerRadius="10"/>
+
+    <Button Text="Заблокировать"
+            Command="{Binding BlockUserCommand}"
+            BackgroundColor="#1C1C26"
+            TextColor="#FF4D4D"
+            CornerRadius="10"/>
+
+    <Button Text="Удалить"
+            Command="{Binding DeleteUserCommand}"
+            BackgroundColor="#FF4D4D"
+            TextColor="White"
+            CornerRadius="10"/>
+
+</FlexLayout>
+
+        
 
         <!-- ===== СПИСОК ПОЛЬЗОВАТЕЛЕЙ ===== -->
         <CollectionView Grid.Row="2"
                         ItemsSource="{Binding Users}"
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedUser}">
+            
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                           ItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
 
-                    <Border Margin="0,6"
-                            Padding="16"
+                    <Border Padding="16"
                             BackgroundColor="#1C1C26"
-                            Stroke="#8B5CF6"
+                            Stroke="#00cccc"
                             StrokeThickness="1"
-                            StrokeShape="RoundRectangle 16">
+                            StrokeShape="RoundRectangle 10">
 
                         <Grid ColumnDefinitions="*,Auto">
 
@@ -101,7 +140,7 @@
 
                                 <Label Text="{Binding Role}"
                                        FontSize="12"
-                                       TextColor="#8B5CF6"/>
+                                       TextColor="#00cccc"/>
                             </VerticalStackLayout>
 
                             <Label Text="{Binding Status}"

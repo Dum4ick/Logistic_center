@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LogisticCenter.Data;
 using LogisticCenter.Services;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -10,7 +11,6 @@ namespace LogisticCenter.ViewModels
     {
         public MainMenuViewModel()
         {
-            // 🔄 Обновляем UI при изменении данных пользователя
             UserSession.Instance.PropertyChanged += OnUserSessionChanged;
         }
 
@@ -28,13 +28,9 @@ namespace LogisticCenter.ViewModels
                 ? UserSession.Instance.FullName
                 : UserSession.Instance.Username;
 
-        public string Username =>
-            !string.IsNullOrWhiteSpace(UserSession.Instance.Username)
-                ? $"@{UserSession.Instance.Username}"
-                : string.Empty;
+        public string Username => $"@{UserSession.Instance.Username}";
 
-        public string Email =>
-            UserSession.Instance.Email ?? string.Empty;
+        public string Email => UserSession.Instance.Email ?? string.Empty;
 
         // ===== СОСТОЯНИЕ МЕНЮ ПРОФИЛЯ =====
 
@@ -49,30 +45,68 @@ namespace LogisticCenter.ViewModels
             IsProfileMenuVisible = !IsProfileMenuVisible;
         }
 
+        // 🔹 НАЗНАЧЕНИЕ ИМЕНИ (ТО ЧТО ТЕБЕ НУЖНО)
+        [RelayCommand]
+        async Task SetFullName()
+        {
+            IsProfileMenuVisible = false;
+
+            string result = await Shell.Current.DisplayPromptAsync(
+                "Назначить имя",
+                "Введите имя (до 200 символов)",
+                accept: "Сохранить",
+                cancel: "Отмена",
+                placeholder: "Полное имя",
+                maxLength: 200,
+                keyboard: Keyboard.Text
+            );
+
+            if (string.IsNullOrWhiteSpace(result))
+                return;
+
+            var api = new ApiData();
+            var response = await api.UpdateFullNameAsync(
+                Convert.ToInt32(UserSession.Instance.Id),
+                result.Trim()
+            );
+
+            if (response == "OK")
+            {
+                UserSession.Instance.FullName = result.Trim();
+            }
+            else
+            {
+                await Shell.Current.DisplayAlert(
+                    "Ошибка",
+                    response,
+                    "OK"
+                );
+            }
+        }
+
+        // ===== ВЫХОД С ПОДТВЕРЖДЕНИЕМ =====
         [RelayCommand]
         async Task Logout_Clicked()
         {
             IsProfileMenuVisible = false;
 
             bool confirm = await Shell.Current.DisplayAlert(
-                "Выход из аккаунта",
+                "Выход",
                 "Вы действительно хотите выйти?",
                 "Да",
-                "Отмена");
+                "Отмена"
+            );
 
-            if (!confirm)
-                return;
+            if (!confirm) return;
 
             UserSession.Instance.Clear();
             await Shell.Current.GoToAsync("//login");
         }
-
 
         [RelayCommand]
         async Task GoToUsers()
         {
             await Shell.Current.GoToAsync("//users");
         }
-
     }
 }

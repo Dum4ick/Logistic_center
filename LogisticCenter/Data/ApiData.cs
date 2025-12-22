@@ -99,4 +99,31 @@ public class ApiData
             return $"Ошибка сети: {ex.Message}";
         }
     }
+
+    // Обновление имени пользователя (full_name)
+    public async Task<string> UpdateFullNameAsync(int userId, string fullName)
+    {
+        const string url = "http://f1196925.xsph.ru/update_fullname.php";
+
+        try
+        {
+            var response = await _httpClient.PostAsJsonAsync(url, new
+            {
+                user_id = userId,
+                full_name = fullName
+            });
+
+            var result = await response.Content.ReadFromJsonAsync<ApiResponse<object>>();
+
+            if (result != null && result.Status == "success")
+                return "OK";
+
+            return result?.Message ?? "Ошибка обновления имени";
+        }
+        catch (Exception ex)
+        {
+            return $"Ошибка сети: {ex.Message}";
+        }
+    }
+
 }
