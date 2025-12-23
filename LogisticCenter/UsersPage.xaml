@@ -59,7 +59,6 @@
 
                 <Entry Grid.Column="1"
                        Placeholder="Поиск по имени, email или роли"
-                       Text="{Binding SearchText}"
                        TextColor="White"
                        PlaceholderColor="#777"
                        BackgroundColor="Transparent"

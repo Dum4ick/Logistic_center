@@ -18,7 +18,7 @@ public class ApiData
     public async Task<List<UserModel>> GetUsers()
     {
         //Подключение скрипта для получения спискка пользвоателей
-        const string url = "http://f1196925.xsph.ru/get_users.php";
+        const string url = "http://f1196925.xsph.ru/get_all_users.php";
 
         try
         {

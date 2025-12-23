@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using LogisticCenter.Data;
 using System.Collections.ObjectModel;
@@ -34,11 +35,20 @@ public partial class UsersViewModel : ObservableObject
                 Id = u.Id,
                 FullName = string.IsNullOrEmpty(u.FullName) ? u.Name : u.FullName,
                 Email = u.Email,
-                Role = u.RoleId == "1" ? "Администратор" : "Пользователь",
+                Role = u.RoleName,
                 IsBlocked = false
             });
         }
     }
+
+    [RelayCommand]
+    async Task AddUser()
+    {
+        var popup = new AddUserPopup();
+        await Shell.Current.CurrentPage.ShowPopupAsync(popup);
+    }
+
+
 
     // ===== КОМАНДЫ =====
     [RelayCommand]

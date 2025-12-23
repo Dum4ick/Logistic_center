@@ -1,0 +1,51 @@
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="LogisticCenter.AddUserPopup"
+    Size="400,400">
+
+    <Frame BackgroundColor="Black" CornerRadius="10" Padding="0">
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Label Text="Добавление пользователя"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+
+            <Entry Placeholder="Имя пользователя"
+                   Text="{Binding Username}"
+                   TextColor="White"
+                   PlaceholderColor="#777"/>
+
+            <Entry Placeholder="Email"
+                   Text="{Binding Email}"
+                   Keyboard="Email"
+                   TextColor="White"
+                   PlaceholderColor="#777"/>
+
+            <Entry Placeholder="Пароль"
+                   Text="{Binding Password}"
+                   IsPassword="True"
+                   TextColor="White"
+                   PlaceholderColor="#777"/>
+
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+
+                <Button Text="Отмена"
+                        Command="{Binding CloseCommand}"
+                        BackgroundColor="#1C1C26"
+                        TextColor="White"
+                        CornerRadius="10"/>
+
+                <Button Text="Создать"
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="#00cccc"
+                        TextColor="White"
+                        CornerRadius="10"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </Frame>
+</toolkit:Popup>
