@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LogisticCenter.ProductsPage"
+             BackgroundColor="#121212">
+
+    <Grid Padding="20"
+          RowDefinitions="Auto,Auto,*"
+          RowSpacing="10">
+
+        <!-- ===== ЗАГОЛОВОК ===== -->
+        <Grid ColumnDefinitions="Auto,*"
+              VerticalOptions="Center">
+
+            <Label Grid.Column="0"
+                   Text="Товары"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   VerticalOptions="Center"
+                   Margin="12,0,0,0"/>
+
+            <Button Grid.Column="1"
+                    Text="↩ Вернуться"
+                    Command="{Binding GoBackCommand}"
+                    BackgroundColor="#1C1C26"
+                    BorderColor="#00cccc"
+                    BorderWidth="2"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="44"
+                    HorizontalOptions="End"/>
+        </Grid>
+
+        <!-- ===== ПАНЕЛЬ ДЕЙСТВИЙ ===== -->
+        <FlexLayout Grid.Row="1"
+                    Wrap="Wrap"
+                    Direction="Row"
+                    AlignItems="Center"
+                    JustifyContent="Start">
+
+            <!-- 🔍 ПОИСК -->
+            <Border Padding="10"
+                    BackgroundColor="#1C1C26"
+                    Stroke="#00cccc"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 10"
+                    FlexLayout.Basis="300"
+                    FlexLayout.Grow="1"
+                    HeightRequest="50"
+                    Margin="0,0,5,0">
+
+                <Grid ColumnDefinitions="Auto,*">
+
+                    <Button Text="🔍"
+                       HeightRequest="50"
+                       BackgroundColor="Transparent"
+                       FontSize="18"
+                       TextColor="#00cccc"
+                       VerticalOptions="Center"
+                       Command="{Binding SearchCommand}"/>
+
+                    <Entry Grid.Column="1"
+                       Placeholder="Поиск по названию или катекории"
+                       Text="{Binding SearchText}"
+                       TextColor="White"
+                       PlaceholderColor="#777"
+                       BackgroundColor="Transparent"
+                       ClearButtonVisibility="WhileEditing"
+                       HeightRequest="50"/>
+
+                </Grid>
+            </Border>
+
+            <!-- КНОПКИ -->
+            <Button Text="Добавить"
+                    Command="{Binding AddCommand}"
+                    BackgroundColor="#00cccc"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Margin="0,0,5,0"/>
+
+            <Button Text="Редактировать"
+                    Command="{Binding EditCommand}"
+                    BackgroundColor="#1C1C26"
+                    BorderColor="#00cccc"
+                    BorderWidth="1"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Margin="0,0,5,0"/>
+
+            <Button Text="Удалить"
+                    Command="{Binding DeleteCommand}"
+                    BackgroundColor="#FF4D4D"
+                    TextColor="White"
+                    CornerRadius="10"/>
+
+        </FlexLayout>
+        
+        <!-- ===== СПИСОК ТОВАРОВ ===== -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Products}"
+                        SelectedItem="{Binding SelectedProduct}"
+                        SelectionMode="Single">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                     Span="4"
+                     HorizontalItemSpacing="10"
+                     VerticalItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+            
+            
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Border
+                        Padding="15"
+                        BackgroundColor="#1C1C26"
+                        Stroke="#00cccc"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 8">
+
+                        <VerticalStackLayout Spacing="5">
+
+                            <!-- Название -->
+                            <Label Text="{Binding Name}"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="White"/>  
+
+                            <!-- Категория -->
+                            <Label Text="{Binding Category}" TextColor="#00cccc"/>
+
+                            <!-- Вес -->
+                            <HorizontalStackLayout Spacing="5">
+                                <Label Text="Вес:" TextColor="#AAAAAA"/>
+                                <Label Text="{Binding Weight}"/>
+                                <Label Text="кг"/>
+                            </HorizontalStackLayout>
+
+                            <!-- Цена -->
+                            <HorizontalStackLayout Spacing="5">
+                                <Label Text="Цена:" TextColor="#AAAAAA"/>
+                                <Label Text="{Binding Price}"/>
+                                <Label Text="р."/>
+                            </HorizontalStackLayout>
+
+                            <!-- Количество -->
+                            <HorizontalStackLayout Spacing="5">
+                                <Label Text="В наличии:"
+                           TextColor="#AAAAAA"/>
+                                <Label Text="{Binding Quantity}"/>
+                                <Label Text="шт."/>
+                            </HorizontalStackLayout>
+
+                        </VerticalStackLayout>
+
+                    </Border>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

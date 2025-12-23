@@ -6,9 +6,9 @@
     x:Class="LogisticCenter.AppShell">
 
     <ShellContent
-    Title="Main"
-    ContentTemplate="{DataTemplate local:MainMenuPage}"
-    Route="main" />
+        Title="Main"
+        ContentTemplate="{DataTemplate local:MainMenuPage}"
+        Route="main" />
 
     <ShellContent
         Title="Login"
@@ -24,5 +24,10 @@
         Title="Users"
         ContentTemplate="{DataTemplate local:UsersPage}"
         Route="users"/>
+
+    <ShellContent
+        Title="Products"
+        ContentTemplate="{DataTemplate local:ProductsPage}"
+        Route="products" />
 
 </Shell>

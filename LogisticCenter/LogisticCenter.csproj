@@ -71,6 +71,9 @@
 	  <Compile Update="MainMenuPage.xaml.cs">
 	    <DependentUpon>MainMenuPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="ProductsPage.xaml.cs">
+	    <DependentUpon>ProductsPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UsersPage.xaml.cs">
 	    <DependentUpon>UsersPage.xaml</DependentUpon>
 	  </Compile>
@@ -84,6 +87,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="MainMenuPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="ProductsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UsersPage.xaml">

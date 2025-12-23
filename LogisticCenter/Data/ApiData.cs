@@ -126,4 +126,35 @@ public class ApiData
         }
     }
 
+    public async Task<List<ProductModel>> GetProducts(string search = "")
+    {
+        string url = $"http://f1196925.xsph.ru/get_products.php?search={search}";
+        var result = await _httpClient
+            .GetFromJsonAsync<ApiResponse<List<ProductModel>>>(url);
+        return result?.Data ?? new();
+    }
+
+    public async Task<bool> AddProduct(ProductModel p)
+    {
+        var r = await _httpClient.PostAsJsonAsync(
+            "http://f1196925.xsph.ru/add_product.php", p);
+        return r.IsSuccessStatusCode;
+    }
+
+    public async Task<bool> UpdateProduct(ProductModel p)
+    {
+        var r = await _httpClient.PostAsJsonAsync(
+            "http://f1196925.xsph.ru/update_product.php", p);
+        return r.IsSuccessStatusCode;
+    }
+
+    public async Task<bool> DeleteProduct(int id)
+    {
+        var r = await _httpClient.PostAsJsonAsync(
+            "http://f1196925.xsph.ru/delete_product.php",
+            new { id });
+        return r.IsSuccessStatusCode;
+    }
+
+
 }

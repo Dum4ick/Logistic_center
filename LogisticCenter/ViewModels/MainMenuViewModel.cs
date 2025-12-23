@@ -92,7 +92,7 @@ namespace LogisticCenter.ViewModels
 
             bool confirm = await Shell.Current.DisplayAlert(
                 "Выход",
-                "Вы действительно хотите выйти?",
+                "Вы действительно хотите выйти из аккаунта?",
                 "Да",
                 "Отмена"
             );
@@ -104,9 +104,32 @@ namespace LogisticCenter.ViewModels
         }
 
         [RelayCommand]
+        async Task CloseApp()
+        {
+            IsProfileMenuVisible = false;
+
+            bool confirm = await Shell.Current.DisplayAlert(
+                "Выход",
+                "Вы действительно хотите выйти?",
+                "Да",
+                "Отмена"
+            );
+
+            if (!confirm) return;
+
+            Application.Current.Quit();
+        }
+
+        [RelayCommand]
         async Task GoToUsers()
         {
             await Shell.Current.GoToAsync("//users");
+        }
+
+        [RelayCommand]
+        async Task GoToProducts()
+        {
+            await Shell.Current.GoToAsync("//products");
         }
     }
 }

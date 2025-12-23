@@ -29,7 +29,8 @@
                     <Button Text="Товары"
                             BackgroundColor="#1C1C26"
                             TextColor="White"
-                            CornerRadius="10"/>
+                            CornerRadius="10"
+                            Command="{Binding GoToProductsCommand}"/>
 
                     <Button Text="Заказы"
                             BackgroundColor="#1C1C26"
@@ -63,7 +64,7 @@
 
             <Button
                 Text="Выход"
-                Command="{Binding Logout_ClickedCommand}"
+                Command="{Binding CloseAppCommand}"
                 BackgroundColor="#00cccc"
                 TextColor="White"
                 CornerRadius="10"
