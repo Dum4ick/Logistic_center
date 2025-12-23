@@ -4,8 +4,8 @@ using System.Data;
 using System.Text;
 using System.Text.Json;
 
-namespace LogisticCenter
-{
+namespace LogisticCenter;
+
     public partial class UsersPage : ContentPage
 
     {
@@ -15,4 +15,4 @@ namespace LogisticCenter
             BindingContext = new UsersViewModel();
         }
     }
-}
+

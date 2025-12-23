@@ -4,12 +4,12 @@ using System.Data;
 using System.Text;
 using System.Text.Json;
 
-namespace LogisticCenter
-{
-    public partial class MainPage : ContentPage
+namespace LogisticCenter;
+
+    public partial class RegPage : ContentPage
     {
 
-        public MainPage()
+        public RegPage()
         {
             InitializeComponent();
             BindingContext = new RegViewModel();
@@ -18,4 +18,4 @@ namespace LogisticCenter
         
     }
 
-}
+
