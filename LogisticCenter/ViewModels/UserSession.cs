@@ -41,7 +41,7 @@ namespace LogisticCenter.Services
             set => SetProperty(ref fullName, value);
         }
 
-        //УСТАНОВКА ПОЛЬЗОВАТЕЛЯ
+        //сохранение данного пользователя
         public void SetUser(UserModel user)
         {
             Id = user.Id;
@@ -52,7 +52,7 @@ namespace LogisticCenter.Services
             SaveToStorage();
         }
 
-        //СОХРАНЕНИЕ
+        //сохранение
         private void SaveToStorage()
         {
             Preferences.Set("user_id", Id);
@@ -61,7 +61,7 @@ namespace LogisticCenter.Services
             Preferences.Set("full_name", FullName);
         }
 
-        //ЗАГРУЗКА ПРИ СТАРТЕ
+        //загрузка при старте
         private void LoadFromStorage()
         {
             Id = Preferences.Get("user_id", null);
@@ -70,7 +70,7 @@ namespace LogisticCenter.Services
             FullName = Preferences.Get("full_name", null);
         }
 
-        //ВЫХОД
+        //выход
         public void Clear()
         {
             Preferences.Clear();

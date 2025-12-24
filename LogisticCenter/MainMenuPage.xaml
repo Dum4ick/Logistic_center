@@ -35,28 +35,40 @@
                     <Button Text="Заказы"
                             BackgroundColor="#1C1C26"
                             TextColor="White"
-                            CornerRadius="10"/>
+                            CornerRadius="10"
+                            Command="{Binding GoToOrdersCommand}"/>
 
                     <Button Text="Остатки"
                             BackgroundColor="#1C1C26"
                             TextColor="White"
-                            CornerRadius="10"/>
+                            CornerRadius="10"
+                            Command="{Binding GoToStockCommand}"/>
 
                     <Button Text="Склады"
                             BackgroundColor="#1C1C26"
                             TextColor="White"
-                            CornerRadius="10"/>
-
-                    <Button Text="Пользователи"
-                            BackgroundColor="#1C1C26"
-                            TextColor="White"
                             CornerRadius="10"
-                            Command="{Binding GoToUsersCommand}"/>
+                            Command="{Binding GoToWarehousesCommand}"/>
+
+                    <Button Text="Отгрузки"
+                        BackgroundColor="#1C1C26"
+                        TextColor="White"
+                        CornerRadius="10"
+                        Command="{Binding GoToShipmentCommand}"/>
 
                 <Button Text="Отчёты"
-                            BackgroundColor="#1C1C26"
-                            TextColor="White"
-                            CornerRadius="10"/>
+                    BackgroundColor="#1C1C26"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Command="{Binding GoToReportsCommand}"/>
+
+                <Button Text="Пользователи"
+                                    BackgroundColor="#1C1C26"
+                                    TextColor="White"
+                                    CornerRadius="10"
+                                    Command="{Binding GoToUsersCommand}"/>
+
+                        
 
             </VerticalStackLayout>
             <!--</Border>-->
@@ -71,7 +83,6 @@
                 VerticalOptions="End"
                 Margin="16"/>
 
-            <!-- ===== ОСНОВНАЯ ОБЛАСТЬ ===== -->
             <Border Grid.Column="1"
                     Margin="10"
                     Stroke="#00cccc"
@@ -81,7 +92,6 @@
 
                 <Grid Padding="24" RowDefinitions="Auto,*">
 
-                    <!-- ===== ШАПКА ===== -->
                     <Grid ColumnDefinitions="*,Auto,Auto">
 
                         <Label Text="Главное меню"
@@ -109,7 +119,7 @@
 
                     </Grid>
 
-                    <!-- ===== КАРТОЧКИ ===== -->
+                    <!--  Карточки менюшек  -->
                     <Grid Grid.Row="1"
                           Margin="0,28,0,0"
                           ColumnDefinitions="*,*,*"
@@ -149,8 +159,8 @@
                                 Stroke="#00cccc" StrokeThickness="2"
                                 StrokeShape="RoundRectangle 10">
                             <VerticalStackLayout Padding="20">
-                                <Label Text="Пользователи" FontSize="18" TextColor="White"/>
-                                <Label Text="Роли и доступ" TextColor="#C7C7D1"/>
+                                <Label Text="Склады" FontSize="18" TextColor="White"/>
+                                <Label Text="Список с основной информацией о скадах" TextColor="#C7C7D1"/>
                             </VerticalStackLayout>
                         </Border>
 
@@ -178,7 +188,6 @@
             </Border>
         </Grid>
 
-        <!-- ================= OVERLAY ПРОФИЛЯ ================= -->
         <Grid IsVisible="{Binding IsProfileMenuVisible}"
               BackgroundColor="#50000000"
               ZIndex="100"

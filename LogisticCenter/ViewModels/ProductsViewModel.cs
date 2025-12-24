@@ -44,6 +44,14 @@ public partial class ProductsViewModel : ObservableObject
     async Task Delete()
     {
         if (SelectedProduct == null) return;
+        bool confirm = await Shell.Current.DisplayAlert(
+            "Удаление товара",
+            $"Вы точно хотите удалить данный товар?",
+            "Да",
+            "Отмена");
+
+        if (!confirm)
+            return;
         await _api.DeleteProduct(Convert.ToInt32(SelectedProduct.Id));
         Load();
     }

@@ -6,7 +6,6 @@
 
     <Grid Padding="20" RowDefinitions="Auto,Auto,*" RowSpacing="16">
 
-        <!-- ===== ЗАГОЛОВОК ===== -->
 
         <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
 
@@ -33,15 +32,13 @@
         </Grid>
 
 
-        <!-- ===== КНОПКИ ДЕЙСТВИЙ ===== -->
         <FlexLayout Grid.Row="1"
             Wrap="Wrap"
             Direction="Row"
             AlignItems="Center"
             JustifyContent="Start">
 
-        <!-- ПОИСК -->
-        <Border Padding="10"
+            <Border Padding="10"
                 BackgroundColor="#1C1C26"
                 Stroke="#00cccc"
                 StrokeThickness="2"
@@ -50,50 +47,68 @@
                 FlexLayout.Grow="1"
                 HeightRequest="50">
 
-            <Grid ColumnDefinitions="Auto,*">
-                
-                <Label Text="🔍"
-                       FontSize="18"
-                       TextColor="#00cccc"
-                       VerticalOptions="Center"/>
+                <Grid ColumnDefinitions="Auto,*">
 
-                <Entry Grid.Column="1"
+                    <Button Text="🔍"
+                        FontSize="18"
+                        TextColor="#00cccc"
+                        BackgroundColor="Transparent"
+                        Command="{Binding SearchCommand}" 
+                        HeightRequest="50"/>
+
+                    <Entry Grid.Column="1"
                        Placeholder="Поиск по имени, email или роли"
+                       Text="{Binding SearchText}"
+                       Completed="OnSearchCompleted"
                        TextColor="White"
                        PlaceholderColor="#777"
                        BackgroundColor="Transparent"
                        ClearButtonVisibility="WhileEditing"
                        HeightRequest="50"/>
-                
-            </Grid>
-    </Border>
+                </Grid>
+            </Border>
 
-    <!-- КНОПКИ -->
-    <Button Text="Добавить"
+            <Picker
+                
+                ItemsSource="{Binding Roles}"
+                ItemDisplayBinding="{Binding RoleName}"
+                SelectedItem="{Binding SelectedRole}"
+                WidthRequest="160"
+                HeightRequest="50"
+                BackgroundColor="#1C1C26"
+                TextColor="White"
+                Margin="5,0,5,0"/>
+
+
+
+            <Button Text="Добавить"
             Command="{Binding AddUserCommand}"
             BackgroundColor="#00cccc"
             TextColor="White"
-            CornerRadius="10"/>
+            CornerRadius="10"
+            Margin="5,0,5,0"/>
 
     <Button Text="Редактировать"
             Command="{Binding EditUserCommand}"
             BackgroundColor="#1C1C26"
             BorderColor="#00cccc"
             TextColor="White"
-            CornerRadius="10"/>
+            CornerRadius="10"
+            Margin="0,0,5,0"/>
 
     <Button Text="Назначить роль"
             Command="{Binding AssignRoleCommand}"
             BackgroundColor="#1C1C26"
             BorderColor="#00cccc"
             TextColor="White"
-            CornerRadius="10"/>
+            CornerRadius="10"
+            Margin="0,0,5,0"/>
 
-    <Button Text="Заблокировать"
+    <!--<Button Text="Заблокировать"
             Command="{Binding BlockUserCommand}"
             BackgroundColor="#1C1C26"
             TextColor="#FF4D4D"
-            CornerRadius="10"/>
+            CornerRadius="10"/>-->
 
     <Button Text="Удалить"
             Command="{Binding DeleteUserCommand}"
@@ -105,25 +120,25 @@
 
         
 
-        <!-- ===== СПИСОК ПОЛЬЗОВАТЕЛЕЙ ===== -->
         <CollectionView Grid.Row="2"
                         ItemsSource="{Binding Users}"
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedUser}">
-            
+
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"
-                           ItemSpacing="5"/>
+                <GridItemsLayout Orientation="Vertical"
+                     Span="2"
+                     VerticalItemSpacing="5"
+                     HorizontalItemSpacing="5"/>
             </CollectionView.ItemsLayout>
 
+
             <CollectionView.ItemTemplate>
+                
                 <DataTemplate>
 
-                    <Border Padding="16"
-                            BackgroundColor="#1C1C26"
-                            Stroke="#00cccc"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 10">
+                    <Frame Padding="16"
+                        BackgroundColor="#1C1C26">
 
                         <Grid ColumnDefinitions="*,Auto">
 
@@ -137,9 +152,10 @@
                                        FontSize="13"
                                        TextColor="#C7C7D1"/>
 
+
                                 <Label Text="{Binding Role}"
-                                       FontSize="12"
-                                       TextColor="#00cccc"/>
+                                   FontSize="12"
+                                   TextColor="#00cccc"/>
                             </VerticalStackLayout>
 
                             <Label Text="{Binding Status}"
@@ -149,7 +165,7 @@
                                    FontAttributes="Bold"/>
 
                         </Grid>
-                    </Border>
+                    </Frame>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>

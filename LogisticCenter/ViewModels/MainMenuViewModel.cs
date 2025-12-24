@@ -130,6 +130,35 @@ namespace LogisticCenter.ViewModels
         async Task GoToProducts()
         {
             await Shell.Current.GoToAsync("//products");
+
+        }
+
+        [RelayCommand]
+        async Task GoToOrders()
+        {
+            await Shell.Current.GoToAsync("//orders");
+
+        }
+
+        [RelayCommand]
+        async Task GoToStock()
+        {
+            await Shell.Current.GoToAsync("//stock");
+
+        }
+
+        [RelayCommand]
+        async Task GoToShipment()
+        {
+            await Shell.Current.GoToAsync("//shipment");
+
+        }
+
+        [RelayCommand]
+        async Task GoToReports()
+        {
+            await Shell.Current.GoToAsync("//reports");
+
         }
     }
 }

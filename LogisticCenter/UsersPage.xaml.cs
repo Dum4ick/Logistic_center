@@ -14,5 +14,13 @@ namespace LogisticCenter;
             InitializeComponent();
             BindingContext = new UsersViewModel();
         }
-    }
+
+            private void OnSearchCompleted(object sender, EventArgs e)
+            {
+                if (BindingContext is UsersViewModel vm)
+                    vm.SearchCommand.Execute(null);
+            }
+
+
+}
 

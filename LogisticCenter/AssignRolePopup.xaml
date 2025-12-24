@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="LogisticCenter.AssignRolePopup"
+    Size="360,300">
+
+    <Frame Padding="16"
+        BackgroundColor="#14141A"
+        CornerRadius="10"
+        BorderColor="#00cccc"
+        >
+        
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+        <Label Text="Назначить роль"
+               FontSize="20"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"/>
+
+        <Picker Title="Выберите роль"
+                ItemsSource="{Binding Roles}"
+                ItemDisplayBinding="{Binding RoleName}"
+                SelectedItem="{Binding SelectedRole}" />
+
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+
+            <Button Text="Отмена"
+                    Command="{Binding CancelCommand}"
+                    BackgroundColor="Red"
+                    TextColor="White"/>
+
+            <Button Text="Сохранить"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#00cccc"
+                    TextColor="White"/>
+        </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </Frame>
+</toolkit:Popup>

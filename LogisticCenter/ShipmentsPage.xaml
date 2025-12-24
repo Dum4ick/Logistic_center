@@ -1,0 +1,51 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LogisticCenter.ShipmentsPage"
+             BackgroundColor="#121212">
+
+    <Grid Padding="20" RowDefinitions="Auto,Auto,*">
+
+        <Grid ColumnDefinitions="Auto,*">
+            <Label Text="Отгрузки"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+
+            <Button Grid.Column="1"
+                    Text="↩ Вернуться"
+                    Command="{Binding GoBackCommand}"
+                    BackgroundColor="#1C1C26"
+                    BorderWidth="2"
+                    BorderColor="#00cccc"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HorizontalOptions="End"/>
+        </Grid>
+
+        <FlexLayout Grid.Row="1" Padding="10">
+            <Button Text="Создать отгрузку"
+                    BackgroundColor="#00cccc"
+                    TextColor="White"
+                    CornerRadius="10"/>
+        </FlexLayout>
+
+        <CollectionView Grid.Row="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="15" BackgroundColor="#1C1C26">
+                        <VerticalStackLayout>
+                            <Label Text="Отгрузка №987"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+                            <Label Text="Дата: 12.05.2025"
+                                   TextColor="#C7C7D1"/>
+                            <Label Text="Статус: Отправлена"
+                                   TextColor="#00cccc"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

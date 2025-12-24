@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="LogisticCenter.EditUserPopup"
+    Size="400,320">
+
+    <Frame BackgroundColor="#14141A"
+           CornerRadius="10"
+           Padding="0"
+           BorderColor="#00cccc">
+
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Label Text="Редактирование пользователя"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+
+            <Border Stroke="#00cccc"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 10">
+                <Entry Placeholder="Имя пользователя"
+                       Text="{Binding FullName}"
+                       TextColor="White"
+                       PlaceholderColor="#777"/>
+            </Border>
+
+            <Border Stroke="#00cccc"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 10">
+                <Entry Placeholder="Email"
+                       Text="{Binding Email}"
+                       Keyboard="Email"
+                       TextColor="White"
+                       PlaceholderColor="#777"/>
+            </Border>
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+
+                <Button Text="Отмена"
+                        Command="{Binding CancelCommand}"
+                        BackgroundColor="Red"
+                        TextColor="White"
+                        CornerRadius="10"/>
+
+                <Button Text="Сохранить"
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="#00cccc"
+                        TextColor="White"
+                        CornerRadius="10"/>
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </Frame>
+</toolkit:Popup>

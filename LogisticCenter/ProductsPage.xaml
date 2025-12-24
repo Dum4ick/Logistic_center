@@ -8,7 +8,6 @@
           RowDefinitions="Auto,Auto,*"
           RowSpacing="10">
 
-        <!-- ===== ЗАГОЛОВОК ===== -->
         <Grid ColumnDefinitions="Auto,*"
               VerticalOptions="Center">
 
@@ -32,14 +31,12 @@
                     HorizontalOptions="End"/>
         </Grid>
 
-        <!-- ===== ПАНЕЛЬ ДЕЙСТВИЙ ===== -->
         <FlexLayout Grid.Row="1"
                     Wrap="Wrap"
                     Direction="Row"
                     AlignItems="Center"
                     JustifyContent="Start">
 
-            <!-- 🔍 ПОИСК -->
             <Border Padding="10"
                     BackgroundColor="#1C1C26"
                     Stroke="#00cccc"
@@ -72,7 +69,6 @@
                 </Grid>
             </Border>
 
-            <!-- КНОПКИ -->
             <Button Text="Добавить"
                     Command="{Binding AddCommand}"
                     BackgroundColor="#00cccc"
@@ -84,7 +80,7 @@
                     Command="{Binding EditCommand}"
                     BackgroundColor="#1C1C26"
                     BorderColor="#00cccc"
-                    BorderWidth="1"
+                    BorderWidth="2"
                     TextColor="White"
                     CornerRadius="10"
                     Margin="0,0,5,0"/>

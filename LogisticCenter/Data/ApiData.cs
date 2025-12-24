@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Json;
+﻿using LogisticCenter.ViewModels;
+using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace LogisticCenter.Data;
@@ -155,6 +156,93 @@ public class ApiData
             new { id });
         return r.IsSuccessStatusCode;
     }
+
+    public async Task<(bool success, string message)> DeleteUserAsync(string userId)
+    {
+        const string url = "http://f1196925.xsph.ru/delete_user.php";
+
+        try
+        {
+            var response = await _httpClient.PostAsJsonAsync(url, new
+            {
+                id = userId
+            });
+
+            var result = await response.Content
+                .ReadFromJsonAsync<ApiResponse<object>>();
+
+            if (result?.Status == "success")
+                return (true, "Пользователь удалён");
+
+            return (false, result?.Message ?? "Ошибка удаления");
+        }
+        catch (Exception ex)
+        {
+            return (false, ex.Message);
+        }
+    }
+
+    public async Task<List<RoleModel>> GetRolesAsync()
+    {
+        const string url = "http://f1196925.xsph.ru/get_roles.php";
+
+        var result = await _httpClient
+            .GetFromJsonAsync<ApiResponse<List<RoleModel>>>(url);
+
+        return result?.Data ?? new();
+    }
+
+
+    public async Task<(bool success, string message)> AssignRoleAsync(int userId, int roleId)
+    {
+        var response = await _httpClient.PostAsJsonAsync(
+            "http://f1196925.xsph.ru/assign_role.php",
+            new { user_id = userId, role_id = roleId });
+
+        var result = await response.Content
+            .ReadFromJsonAsync<ApiResponse<object>>();
+
+        if (result?.Status == "success")
+            return (true, result.Message);
+
+        return (false, result?.Message ?? "Ошибка назначения роли");
+    }
+
+    public async Task<(bool success, string message)> UpdateUserAsync(
+    int userId,
+    string fullName,
+    string email)
+    {
+        var response = await _httpClient.PostAsJsonAsync(
+            "http://f1196925.xsph.ru/update_user.php",
+            new
+            {
+                id = userId,
+                full_name = fullName,
+                email = email
+            });
+
+        var result = await response.Content
+            .ReadFromJsonAsync<ApiResponse<object>>();
+
+        if (result?.Status == "success")
+            return (true, "Данные обновлены");
+
+        return (false, result?.Message ?? "Ошибка обновления");
+    }
+
+    public async Task<List<UserModel>> SearchUsersAsync(string search, int roleId)
+    {
+        string url =
+            $"http://f1196925.xsph.ru/search_users.php?search={Uri.EscapeDataString(search ?? "")}&role_id={roleId}";
+
+        var result = await _httpClient
+            .GetFromJsonAsync<ApiResponse<List<UserModel>>>(url);
+
+        return result?.Data ?? new();
+    }
+
+
 
 
 }

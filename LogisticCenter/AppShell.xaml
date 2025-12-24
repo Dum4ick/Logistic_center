@@ -30,4 +30,24 @@
         ContentTemplate="{DataTemplate local:ProductsPage}"
         Route="products" />
 
+    <ShellContent
+        Title="Orders"
+        ContentTemplate="{DataTemplate local:OrdersPage}"
+        Route="orders" />
+
+    <ShellContent
+        Title="Reports"
+        ContentTemplate="{DataTemplate local:ReportsPage}"
+        Route="reports" />
+
+    <ShellContent
+        Title="Shipment"
+        ContentTemplate="{DataTemplate local:ShipmentsPage}"
+        Route="shipment" />
+
+    <ShellContent
+        Title="Stock"
+        ContentTemplate="{DataTemplate local:StockPage}"
+        Route="stock" />
+
 </Shell>
