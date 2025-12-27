@@ -138,7 +138,8 @@
                 <DataTemplate>
 
                     <Frame Padding="16"
-                        BackgroundColor="#1C1C26">
+                        BackgroundColor="#1C1C26"
+                           BorderColor="Transparent">
 
                         <Grid ColumnDefinitions="*,Auto">
 
@@ -153,7 +154,7 @@
                                        TextColor="#C7C7D1"/>
 
 
-                                <Label Text="{Binding Role}"
+                                <Label Text="{Binding RoleName}"
                                    FontSize="12"
                                    TextColor="#00cccc"/>
                             </VerticalStackLayout>

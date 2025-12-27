@@ -11,10 +11,10 @@ public partial class UsersViewModel : ObservableObject
 {
     private readonly ApiData _api = new();
 
-    public ObservableCollection<UserItemModel> Users { get; } = new();
+    public ObservableCollection<UserModel> Users { get; } = new();
 
     [ObservableProperty]
-    private UserItemModel selectedUser;
+    private UserModel selectedUser;
 
     public UsersViewModel()
     {
@@ -31,13 +31,13 @@ public partial class UsersViewModel : ObservableObject
 
         foreach (var u in users)
         {
-            Users.Add(new UserItemModel
+            Users.Add(new UserModel
             {
                 Id = u.Id,
                 FullName = string.IsNullOrEmpty(u.FullName) ? u.Name : u.FullName,
                 Email = u.Email,
-                Role = u.RoleName,
-                IsBlocked = false
+                RoleName = u.RoleName,
+                IsBlocked = "0"
             });
         }
     }
@@ -76,7 +76,7 @@ public partial class UsersViewModel : ObservableObject
     void BlockUser()
     {
         if (SelectedUser == null) return;
-        SelectedUser.IsBlocked = !SelectedUser.IsBlocked;
+        //SelectedUser.IsBlocked = !SelectedUser.IsBlocked;
     }
 
     [RelayCommand]
@@ -111,12 +111,12 @@ public partial class UsersViewModel : ObservableObject
 
         foreach (var u in users)
         {
-            Users.Add(new UserItemModel
+            Users.Add(new UserModel
             {
                 Id = u.Id,
                 FullName = string.IsNullOrEmpty(u.FullName) ? u.Name : u.FullName,
                 Email = u.Email,
-                Role = u.RoleName
+                RoleName = u.RoleName
             });
         }
     }

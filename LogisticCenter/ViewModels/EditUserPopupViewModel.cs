@@ -17,7 +17,7 @@ public partial class EditUserPopupViewModel : ObservableObject
 
     public EditUserPopupViewModel(
         Popup popup,
-        UserItemModel user,
+        UserModel user,
         UsersViewModel usersVm)
     {
         _popup = popup;

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Microsoft.Maui.Graphics;
 
 namespace LogisticCenter
 {
@@ -6,19 +7,32 @@ namespace LogisticCenter
     {
         [JsonPropertyName("id")]
         public string Id { get; set; }
+
         [JsonPropertyName("username")]
         public string Name { get; set; }
+
         [JsonPropertyName("email")]
         public string Email { get; set; }
+
         [JsonIgnore]
         public string Password { get; set; }
+
         [JsonPropertyName("role_id")]
         public string RoleId { get; set; }
+
         [JsonPropertyName("full_name")]
         public string FullName { get; set; }
+
         [JsonPropertyName("role_name")]
         public string RoleName { get; set; }
+
         [JsonPropertyName("is_blocked")]
         public string IsBlocked { get; set; }
+
+        public string Status =>
+            IsBlocked == "1" ? "Заблокирован" : "Активен";
+
+        public Color StatusColor =>
+            IsBlocked == "1" ? Colors.Red : Colors.LightGreen;
     }
 }

@@ -5,7 +5,7 @@ namespace LogisticCenter;
 
 public partial class EditUserPopup : Popup
 {
-    public EditUserPopup(UserItemModel user, UsersViewModel usersVm)
+    public EditUserPopup(UserModel user, UsersViewModel usersVm)
     {
         InitializeComponent();
         BindingContext = new EditUserPopupViewModel(this, user, usersVm);
