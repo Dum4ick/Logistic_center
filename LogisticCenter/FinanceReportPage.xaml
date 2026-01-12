@@ -2,18 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LogisticCenter.FinanceReportPage"
-             Title="FinanceReportPage"
              BackgroundColor="#121212">
 
     <Grid Padding="20" RowDefinitions="Auto,*">
 
-            <Grid ColumnDefinitions="Auto,*">
-                <Label Text="Финансовый отчёт"
+        <!-- HEADER -->
+        <Grid ColumnDefinitions="Auto,*">
+            <Label Text="Финансовый отчёт"
                    FontSize="26"
                    FontAttributes="Bold"
                    TextColor="White"/>
 
-                <Button Grid.Column="1"
+            <Button Grid.Column="1"
                     Text="↩ Назад"
                     Command="{Binding GoBackCommand}"
                     BackgroundColor="#1C1C26"
@@ -22,53 +22,97 @@
                     TextColor="White"
                     CornerRadius="10"
                     HorizontalOptions="End"/>
-            </Grid>
+        </Grid>
 
-            <ScrollView Grid.Row="1">
+        <!-- CONTENT -->
+        <ScrollView Grid.Row="1">
 
-                <VerticalStackLayout Spacing="16">
+            <VerticalStackLayout Spacing="16">
 
-                    <Frame BackgroundColor="#1C1C26" Padding="16" CornerRadius="10">
-                        <Label Text="{Binding Report.Total_Sales, StringFormat='Общая выручка: {0} р.'}"
+                <!-- KPI BLOCKS -->
+                <Frame BackgroundColor="#1C1C26" Padding="16" CornerRadius="10">
+                    <Label Text="{Binding Report.Total_Sales, StringFormat='Общая выручка: {0:F2} р.'}"
                            TextColor="#22cc88"
                            FontSize="18"/>
-                    </Frame>
+                </Frame>
 
-                    <Frame BackgroundColor="#1C1C26" Padding="16" CornerRadius="10">
-                        <Label Text="{Binding Report.Completed_Orders, StringFormat='Доставлено заказов: {0}'}"
+                <Frame BackgroundColor="#1C1C26" Padding="16" CornerRadius="10">
+                    <Label Text="{Binding Report.Completed_Orders, StringFormat='Доставлено заказов: {0}'}"
                            TextColor="White"
                            FontSize="18"/>
-                    </Frame>
+                </Frame>
 
-                    <Frame BackgroundColor="#1C1C26" Padding="16" CornerRadius="10">
-                        <Label Text="{Binding Report.Avg_Check, StringFormat='Средний чек: {0} р.'}"
+                <Frame BackgroundColor="#1C1C26" Padding="16" CornerRadius="10">
+                    <Label Text="{Binding Report.Avg_Check, StringFormat='Средний чек: {0:F2} р.'}"
                            TextColor="#00cccc"
                            FontSize="18"/>
-                    </Frame>
+                </Frame>
 
-                    <Label Text="Топ товаров:"
+                <!-- TOP PRODUCTS -->
+                <Label Text="Топ товаров"
                        TextColor="White"
-                       FontSize="20"
-                       FontAttributes="Bold"/>
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       Margin="0,10,0,0"/>
 
+                <!-- EXCEL STYLE TABLE -->
+                <VerticalStackLayout Spacing="0">
+
+                    <!-- HEADER ROW -->
+                    <Grid ColumnDefinitions="*,100">
+
+                        <Border Stroke="#00cccc" StrokeThickness="1">
+                            <Label Text="Товар"
+                                   TextColor="#00cccc"
+                                   Padding="10"
+                                   FontSize="14"/>
+                        </Border>
+
+                        <Border Grid.Column="1" Stroke="#00cccc" StrokeThickness="1">
+                            <Label Text="Кол-во"
+                                   TextColor="#00cccc"
+                                   Padding="10"
+                                   FontSize="14"
+                                   HorizontalTextAlignment="Center"/>
+                        </Border>
+
+                    </Grid>
+
+                    <!-- DATA ROWS -->
                     <CollectionView ItemsSource="{Binding Report.Top_Products}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Frame BackgroundColor="#1C1C26" Padding="12" CornerRadius="10">
-                                    <Grid ColumnDefinitions="*,Auto">
-                                        <Label Text="{Binding Name}" TextColor="White"/>
-                                        <Label Grid.Column="1"
-                                           Text="{Binding Qty, StringFormat='{0} шт'}"
-                                           TextColor="#22cc88"/>
-                                    </Grid>
-                                </Frame>
+
+                                <Grid ColumnDefinitions="*,100">
+
+                                    <!-- PRODUCT NAME CELL -->
+                                    <Border Stroke="#00cccc" StrokeThickness="1">
+                                        <Label Text="{Binding Name}"
+                                               TextColor="White"
+                                               Padding="10"
+                                               FontSize="14"/>
+                                    </Border>
+
+                                    <!-- QTY CELL -->
+                                    <Border Grid.Column="1" Stroke="#00cccc" StrokeThickness="1">
+                                        <Label Text="{Binding Qty}"
+                                               TextColor="#22cc88"
+                                               Padding="10"
+                                               FontSize="14"
+                                               HorizontalTextAlignment="Center"/>
+                                    </Border>
+
+                                </Grid>
+
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
 
                 </VerticalStackLayout>
 
-            </ScrollView>
+            </VerticalStackLayout>
 
-        </Grid>
-    </ContentPage>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>

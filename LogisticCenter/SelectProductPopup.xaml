@@ -58,7 +58,8 @@
                         <Frame Padding="10"
                             Margin="0,0,0,8"
                             BackgroundColor="#1C1C26"
-                            CornerRadius="8">
+                            CornerRadius="8"
+                               BorderColor="Transparent">
 
                             <VerticalStackLayout>
                                 <Label Text="{Binding Name}"

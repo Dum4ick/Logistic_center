@@ -13,10 +13,12 @@
         <!-- Склад -->
         <Picker Grid.Row="1"
                 Title="Склад"
+                TitleColor="White"
                 ItemsSource="{Binding Warehouses}"
                 ItemDisplayBinding="{Binding Name}"
                 SelectedItem="{Binding SelectedWarehouse}"
-                TextColor="White"/>
+                TextColor="White"
+                BackgroundColor="#00cccc"/>
 
         <!-- КОРЗИНА -->
         <CollectionView Grid.Row="2"
@@ -26,7 +28,8 @@
                     <Frame BackgroundColor="#1C1C26"
                Padding="12"
                Margin="0,0,0,10"
-               CornerRadius="10">
+               CornerRadius="10"
+                           BorderColor="Transparent">
 
                         <VerticalStackLayout Spacing="8">
 
@@ -54,7 +57,7 @@
 
                             <!-- Сумма -->
                             <Label Text="{Binding Total, StringFormat='Сумма: {0} р.'}"
-                       TextColor="#00cccc"/>
+                                TextColor="#00cccc"/>
 
                         </VerticalStackLayout>
                     </Frame>

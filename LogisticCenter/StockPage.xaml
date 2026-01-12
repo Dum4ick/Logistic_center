@@ -90,7 +90,8 @@
                 <DataTemplate>
                     <Frame Padding="16"
                            BackgroundColor="#1C1C26"
-                           CornerRadius="10">
+                           CornerRadius="10"
+                           BorderColor="Transparent">
 
                         <VerticalStackLayout Spacing="5">
                             <Label Text="{Binding ProductName}"

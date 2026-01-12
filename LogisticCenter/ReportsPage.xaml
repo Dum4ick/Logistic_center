@@ -31,7 +31,8 @@
             <Frame Padding="20"
                    BackgroundColor="#1C1C26"
                    CornerRadius="10"
-                   HasShadow="False">
+                   HasShadow="False"
+                   BorderColor="Transparent">
 
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OpenStockReportCommand}" />
@@ -46,7 +47,8 @@
             <Frame Padding="20"
                    BackgroundColor="#1C1C26"
                    CornerRadius="10"
-                   HasShadow="False">
+                   HasShadow="False"
+                   BorderColor="Transparent">
 
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OpenShipmentReportCommand}" />
@@ -62,7 +64,8 @@
                    BackgroundColor="#1C1C26"
                    CornerRadius="10"
                    HasShadow="False"
-                   IsVisible="{Binding Roles.Level3}">
+                   IsVisible="{Binding Roles.Level3}"
+                   BorderColor="Transparent">
 
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OpenFinanceReportCommand}" />

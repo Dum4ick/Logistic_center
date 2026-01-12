@@ -25,12 +25,12 @@
                     HorizontalOptions="End"/>
         </Grid>
 
-        <!-- SEARCH + FILTER -->
+
         <FlexLayout Grid.Row="1"
                     Wrap="Wrap"
                     AlignItems="Center">
 
-            <!-- SEARCH -->
+
             <Border Padding="10"
                     BackgroundColor="#1C1C26"
                     Stroke="#00cccc"
@@ -60,13 +60,12 @@
                 </Grid>
             </Border>
 
-            <!-- STATUS -->
             <Picker ItemsSource="{Binding Statuses}"
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding SelectedStatus}"
                     WidthRequest="160"
                     HeightRequest="50"
-                    BackgroundColor="#1C1C26"
+                    BackgroundColor="#00cccc"
                     TextColor="White"
                     Margin="5,0"/>
         </FlexLayout>
@@ -83,7 +82,8 @@
                     <Frame Padding="15"
                            BackgroundColor="#1C1C26"
                            CornerRadius="10"
-                           Margin="0,0,0,10">
+                           Margin="0,0,0,10"
+                           BorderColor="Transparent">
 
                         <VerticalStackLayout Spacing="4">
 

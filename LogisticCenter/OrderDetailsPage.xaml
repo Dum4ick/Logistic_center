@@ -27,7 +27,8 @@
         <!-- STATUS -->
         <Frame Grid.Row="1"
                Padding="12"
-               BackgroundColor="#1C1C26">
+               BackgroundColor="#1C1C26"
+               BorderColor="Transparent">
 
             <VerticalStackLayout Spacing="6">
 
@@ -74,7 +75,8 @@
                     <Frame BackgroundColor="#1C1C26"
                            Padding="12"
                            Margin="0,0,0,10"
-                           CornerRadius="10">
+                           CornerRadius="10"
+                           BorderColor="Transparent">
 
                         <VerticalStackLayout Spacing="6">
                             <Label Text="{Binding ProductName}"

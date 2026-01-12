@@ -9,7 +9,7 @@ public class ApiData
     const string LocalBaseUrl = "http://localhost/logistic_center/";
     const string RemoteBaseUrl = "http://f1196925.xsph.ru/logistic_center/";
 
-    const string CurrentURL = RemoteBaseUrl;
+    const string CurrentURL = LocalBaseUrl;
 
     //HttpClient для отправки запросов к серверу
     private readonly HttpClient _httpClient;

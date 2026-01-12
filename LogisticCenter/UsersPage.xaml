@@ -75,7 +75,7 @@
                 SelectedItem="{Binding SelectedRole}"
                 WidthRequest="160"
                 HeightRequest="50"
-                BackgroundColor="#1C1C26"
+                BackgroundColor="#00cccc"
                 TextColor="White"
                 Margin="5,0,5,0"/>
 

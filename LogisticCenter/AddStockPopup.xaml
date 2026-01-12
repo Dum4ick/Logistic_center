@@ -37,11 +37,11 @@
 
 
             <!-- Склад -->
-            <Picker Title="Склад"
+            <Picker
                     ItemsSource="{Binding Warehouses}"
                     ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding SelectedWarehouse}"
-                    BackgroundColor="#1C1C26"
+                    BackgroundColor="#00cccc"
                     TextColor="White"/>
 
             <!-- Количество -->

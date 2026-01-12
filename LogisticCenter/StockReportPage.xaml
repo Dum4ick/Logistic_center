@@ -2,59 +2,116 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LogisticCenter.StockReportPage"
-             Title="StockReportPage"
              BackgroundColor="#121212">
 
-    <Grid Padding="20" RowDefinitions="Auto,*">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-            <Grid ColumnDefinitions="Auto,*">
+            <!-- HEADER -->
+            <Grid ColumnDefinitions="*,Auto">
                 <Label Text="Отчёт по остаткам"
-                   FontSize="26"
-                   FontAttributes="Bold"
-                   TextColor="White"/>
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
 
                 <Button Grid.Column="1"
-                    Text="↩ Назад"
-                    Command="{Binding GoBackCommand}"
-                    BackgroundColor="#1C1C26"
-                    BorderColor="#00cccc"
-                    BorderWidth="2"
-                    TextColor="White"
-                    CornerRadius="10"
-                    HorizontalOptions="End"/>
+                        Text="↩ Назад"
+                        Command="{Binding GoBackCommand}"
+                        BackgroundColor="#1C1C26"
+                        BorderColor="#00cccc"
+                        BorderWidth="2"
+                        TextColor="White"
+                        CornerRadius="10"/>
             </Grid>
 
-            <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding Items}"
-                        VerticalScrollBarVisibility="Always">
+            <!-- EXCEL STYLE TABLE -->
+            <VerticalStackLayout Spacing="0">
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame BackgroundColor="#1C1C26"
-                           Padding="16"
-                           CornerRadius="10"
-                           Margin="0,0,0,10">
+                <!-- HEADER ROW -->
+                <Grid ColumnDefinitions="*,120,80,120">
 
-                            <VerticalStackLayout Spacing="6">
-                                <Label Text="{Binding Product}"
-                                   TextColor="White"
-                                   FontAttributes="Bold"/>
+                    <Border Stroke="#00cccc" StrokeThickness="1">
+                        <Label Text="Товар"
+                               TextColor="#00cccc"
+                               Padding="10"
+                               FontSize="14"/>
+                    </Border>
 
-                                <Label Text="{Binding Warehouse}"
-                                   TextColor="#C7C7D1"/>
+                    <Border Grid.Column="1" Stroke="#00cccc" StrokeThickness="1">
+                        <Label Text="Склад"
+                               TextColor="#00cccc"
+                               Padding="10"
+                               FontSize="14"/>
+                    </Border>
 
-                                <Label Text="{Binding Quantity, StringFormat='Кол-во: {0}'}"
-                                   TextColor="#00cccc"/>
+                    <Border Grid.Column="2" Stroke="#00cccc" StrokeThickness="1">
+                        <Label Text="Кол-во"
+                               TextColor="#00cccc"
+                               Padding="10"
+                               FontSize="14"
+                               HorizontalTextAlignment="Center"/>
+                    </Border>
 
-                                <Label Text="{Binding Total, StringFormat='Сумма: {0} р.'}"
-                                   TextColor="#22cc88"/>
-                            </VerticalStackLayout>
+                    <Border Grid.Column="3" Stroke="#00cccc" StrokeThickness="1">
+                        <Label Text="Сумма"
+                               TextColor="#00cccc"
+                               Padding="10"
+                               FontSize="14"
+                               HorizontalTextAlignment="Center"/>
+                    </Border>
 
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
+                </Grid>
 
-            </CollectionView>
+                <!-- DATA ROWS -->
+                <CollectionView ItemsSource="{Binding Items}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
 
-        </Grid>
-    </ContentPage>
+                            <Grid ColumnDefinitions="*,120,80,120">
+
+                                <!-- PRODUCT -->
+                                <Border Stroke="#00cccc" StrokeThickness="1">
+                                    <Label Text="{Binding Product}"
+                                           TextColor="White"
+                                           Padding="10"
+                                           FontSize="14"/>
+                                </Border>
+
+                                <!-- WAREHOUSE -->
+                                <Border Grid.Column="1" Stroke="#00cccc" StrokeThickness="1">
+                                    <Label Text="{Binding Warehouse}"
+                                           TextColor="#C7C7D1"
+                                           Padding="10"
+                                           FontSize="14"/>
+                                </Border>
+
+                                <!-- QUANTITY -->
+                                <Border Grid.Column="2" Stroke="#00cccc" StrokeThickness="1">
+                                    <Label Text="{Binding Quantity}"
+                                           TextColor="#00cccc"
+                                           Padding="10"
+                                           FontSize="14"
+                                           HorizontalTextAlignment="Center"/>
+                                </Border>
+
+                                <!-- TOTAL -->
+                                <Border Grid.Column="3" Stroke="#00cccc" StrokeThickness="1">
+                                    <Label Text="{Binding Total, StringFormat='{0} р.'}"
+                                           TextColor="#22cc88"
+                                           Padding="10"
+                                           FontSize="14"
+                                           HorizontalTextAlignment="Center"/>
+                                </Border>
+
+                            </Grid>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -2,62 +2,104 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LogisticCenter.ShipmentReportPage"
-             Title="ShipmentReportPage"
              BackgroundColor="#121212">
 
-    <Grid Padding="20" RowDefinitions="Auto,*">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-            <Grid ColumnDefinitions="Auto,*">
+            <!-- HEADER -->
+            <Grid ColumnDefinitions="*,Auto">
                 <Label Text="Отчёт по отгрузкам"
-                   FontSize="26"
-                   FontAttributes="Bold"
-                   TextColor="White"/>
+                       FontSize="26"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
 
                 <Button Grid.Column="1"
-                    Text="↩ Назад"
-                    Command="{Binding GoBackCommand}"
-                    BackgroundColor="#1C1C26"
-                    BorderColor="#00cccc"
-                    BorderWidth="2"
-                    TextColor="White"
-                    CornerRadius="10"
-                    HorizontalOptions="End"/>
+                        Text="↩ Назад"
+                        Command="{Binding GoBackCommand}"
+                        BackgroundColor="#1C1C26"
+                        BorderColor="#00cccc"
+                        BorderWidth="2"
+                        TextColor="White"
+                        CornerRadius="10"/>
             </Grid>
 
-            <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding Items}"
-                        VerticalScrollBarVisibility="Always">
+            <!-- EXCEL TABLE -->
+            <VerticalStackLayout Spacing="0">
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame BackgroundColor="#1C1C26"
-                           Padding="16"
-                           CornerRadius="10"
-                           Margin="0,0,0,10">
+                <!-- HEADER ROW -->
+                <Grid ColumnDefinitions="70,70,*,140,70">
 
-                            <VerticalStackLayout Spacing="6">
-                                <Label Text="{Binding Shipment_Id, StringFormat='Отгрузка #{0}'}"
-                                   TextColor="White"
-                                   FontAttributes="Bold"/>
+                    <Border Stroke="#00cccc" StrokeThickness="1">
+                        <Label Text="ID" TextColor="#00cccc" Padding="10"/>
+                    </Border>
 
-                                <Label Text="{Binding Order_Id, StringFormat='Заказ: {0}'}"
-                                   TextColor="#C7C7D1"/>
+                    <Border Grid.Column="1" Stroke="#00cccc" StrokeThickness="1">
+                        <Label Text="Заказ" TextColor="#00cccc" Padding="10"/>
+                    </Border>
 
-                                <Label Text="{Binding Status}"
-                                   TextColor="#00cccc"/>
+                    <Border Grid.Column="2" Stroke="#00cccc" StrokeThickness="1">
+                        <Label Text="Статус" TextColor="#00cccc" Padding="10"/>
+                    </Border>
 
-                                <Label Text="{Binding Created_At, StringFormat='Дата: {0}'}"
-                                   TextColor="#C7C7D1"/>
+                    <Border Grid.Column="3" Stroke="#00cccc" StrokeThickness="1">
+                        <Label Text="Дата" TextColor="#00cccc" Padding="10"/>
+                    </Border>
 
-                                <Label Text="{Binding Items_Count, StringFormat='Товаров: {0}'}"
-                                   TextColor="#22cc88"/>
-                            </VerticalStackLayout>
+                    <Border Grid.Column="4" Stroke="#00cccc" StrokeThickness="1">
+                        <Label Text="Кол-во" TextColor="#00cccc" Padding="10"
+                               HorizontalTextAlignment="Center"/>
+                    </Border>
 
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
+                </Grid>
 
-            </CollectionView>
+                <!-- DATA ROWS -->
+                <CollectionView ItemsSource="{Binding Items}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
 
-        </Grid>
-    </ContentPage>
+                            <Grid ColumnDefinitions="70,70,*,140,70">
+
+                                <Border Stroke="#00cccc" StrokeThickness="1">
+                                    <Label Text="{Binding Shipment_Id}"
+                                           TextColor="White"
+                                           Padding="10"/>
+                                </Border>
+
+                                <Border Grid.Column="1" Stroke="#00cccc" StrokeThickness="1">
+                                    <Label Text="{Binding Order_Id}"
+                                           TextColor="#C7C7D1"
+                                           Padding="10"/>
+                                </Border>
+
+                                <Border Grid.Column="2" Stroke="#00cccc" StrokeThickness="1">
+                                    <Label Text="{Binding Status}"
+                                           TextColor="#00cccc"
+                                           Padding="10"/>
+                                </Border>
+
+                                <Border Grid.Column="3" Stroke="#00cccc" StrokeThickness="1">
+                                    <Label Text="{Binding Created_At}"
+                                           TextColor="#C7C7D1"
+                                           Padding="10"/>
+                                </Border>
+
+                                <Border Grid.Column="4" Stroke="#00cccc" StrokeThickness="1">
+                                    <Label Text="{Binding Items_Count}"
+                                           TextColor="#22cc88"
+                                           Padding="10"
+                                           HorizontalTextAlignment="Center"/>
+                                </Border>
+
+                            </Grid>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

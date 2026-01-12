@@ -28,7 +28,9 @@
 
             <Picker ItemsSource="{Binding Categories}"
                 ItemDisplayBinding="{Binding Name}"
-                SelectedItem="{Binding SelectedCategory}"/>
+                SelectedItem="{Binding SelectedCategory}"
+                BackgroundColor="#00cccc"
+                    TextColor="White"/>
 
 
             <Border Stroke="#00cccc"

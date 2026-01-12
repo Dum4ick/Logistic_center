@@ -72,7 +72,7 @@
             <Picker
                 ItemsSource="{Binding Categories}"
                 SelectedItem="{Binding SelectedCategory}"
-                BackgroundColor="#1C1C26"
+                BackgroundColor="#00cccc"
                 TextColor="White"
                 Margin="0,0,5,0"/>
 
@@ -138,14 +138,14 @@
                             <HorizontalStackLayout Spacing="5">
                                 <Label Text="Вес:" TextColor="#AAAAAA"/>
                                 <Label Text="{Binding Weight}" TextColor="White"/>
-                                <Label Text="кг"/>
+                                <Label Text="кг" TextColor="White"/>
                             </HorizontalStackLayout>
 
                             <!-- Цена -->
                             <HorizontalStackLayout Spacing="5">
                                 <Label Text="Цена:" TextColor="#AAAAAA"/>
                                 <Label Text="{Binding Price}" TextColor="White"/>
-                                <Label Text="р."/>
+                                <Label Text="р." TextColor="White"/>
                             </HorizontalStackLayout>
 
                         </VerticalStackLayout>
