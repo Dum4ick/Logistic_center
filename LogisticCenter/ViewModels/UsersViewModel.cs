@@ -16,6 +16,10 @@ public partial class UsersViewModel : ObservableObject
     [ObservableProperty]
     private UserModel selectedUser;
 
+    //
+    private List<UserModel> _allUsers = new();
+
+
     public UsersViewModel()
     {
         LoadUsersCommand.Execute(null);
@@ -26,21 +30,27 @@ public partial class UsersViewModel : ObservableObject
     private async Task LoadUsers()
     {
         Users.Clear();
+        _allUsers.Clear();
 
         var users = await _api.GetUsers();
 
         foreach (var u in users)
         {
-            Users.Add(new UserModel
+            var user = new UserModel
             {
                 Id = u.Id,
                 FullName = string.IsNullOrEmpty(u.FullName) ? u.Name : u.FullName,
                 Email = u.Email,
                 RoleName = u.RoleName,
-                IsBlocked = "0"
-            });
+                RoleId = u.RoleId,
+                IsBlocked = u.IsBlocked
+            };
+
+            _allUsers.Add(user);
+            Users.Add(user);
         }
     }
+
 
     [RelayCommand]
     async Task AddUser()
@@ -98,30 +108,38 @@ public partial class UsersViewModel : ObservableObject
     }
 
     [RelayCommand]
-    async Task Search()
+    void Search()
     {
-        if (SelectedRole == null)
+        if (_allUsers.Count == 0)
             return;
 
         Users.Clear();
 
-        int roleId = Convert.ToInt32(SelectedRole.Id);
+        string text = SearchText?.ToLower() ?? "";
+        string selectedRoleId = SelectedRole?.Id;
 
-        var users = await _api.SearchUsersAsync(SearchText ?? "", roleId);
+        var filtered = _allUsers.Where(u =>
+            (
+                string.IsNullOrWhiteSpace(text)
+                || (u.FullName?.ToLower().Contains(text) ?? false)
+                || (u.Email?.ToLower().Contains(text) ?? false)
+                || (u.RoleName?.ToLower().Contains(text) ?? false)
+            )
+            &&
+            (
+                selectedRoleId == "0"
+                || u.RoleId == selectedRoleId
+            )
+        );
 
-        foreach (var u in users)
-        {
-            Users.Add(new UserModel
-            {
-                Id = u.Id,
-                FullName = string.IsNullOrEmpty(u.FullName) ? u.Name : u.FullName,
-                Email = u.Email,
-                RoleName = u.RoleName
-            });
-        }
+        foreach (var user in filtered)
+            Users.Add(user);
     }
 
-
+    partial void OnSearchTextChanged(string value)
+    {
+        SearchCommand.Execute(null);
+    }
 
 
     [RelayCommand]

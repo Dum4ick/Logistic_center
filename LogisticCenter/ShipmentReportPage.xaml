@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LogisticCenter.ShipmentReportPage"
+             Title="ShipmentReportPage"
+             BackgroundColor="#121212">
+
+    <Grid Padding="20" RowDefinitions="Auto,*">
+
+            <Grid ColumnDefinitions="Auto,*">
+                <Label Text="Отчёт по отгрузкам"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+
+                <Button Grid.Column="1"
+                    Text="↩ Назад"
+                    Command="{Binding GoBackCommand}"
+                    BackgroundColor="#1C1C26"
+                    BorderColor="#00cccc"
+                    BorderWidth="2"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HorizontalOptions="End"/>
+            </Grid>
+
+            <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Items}"
+                        VerticalScrollBarVisibility="Always">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="#1C1C26"
+                           Padding="16"
+                           CornerRadius="10"
+                           Margin="0,0,0,10">
+
+                            <VerticalStackLayout Spacing="6">
+                                <Label Text="{Binding Shipment_Id, StringFormat='Отгрузка #{0}'}"
+                                   TextColor="White"
+                                   FontAttributes="Bold"/>
+
+                                <Label Text="{Binding Order_Id, StringFormat='Заказ: {0}'}"
+                                   TextColor="#C7C7D1"/>
+
+                                <Label Text="{Binding Status}"
+                                   TextColor="#00cccc"/>
+
+                                <Label Text="{Binding Created_At, StringFormat='Дата: {0}'}"
+                                   TextColor="#C7C7D1"/>
+
+                                <Label Text="{Binding Items_Count, StringFormat='Товаров: {0}'}"
+                                   TextColor="#22cc88"/>
+                            </VerticalStackLayout>
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </Grid>
+    </ContentPage>

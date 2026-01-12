@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LogisticCenter.FinanceReportPage"
+             Title="FinanceReportPage"
+             BackgroundColor="#121212">
+
+    <Grid Padding="20" RowDefinitions="Auto,*">
+
+            <Grid ColumnDefinitions="Auto,*">
+                <Label Text="Финансовый отчёт"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+
+                <Button Grid.Column="1"
+                    Text="↩ Назад"
+                    Command="{Binding GoBackCommand}"
+                    BackgroundColor="#1C1C26"
+                    BorderColor="#00cccc"
+                    BorderWidth="2"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HorizontalOptions="End"/>
+            </Grid>
+
+            <ScrollView Grid.Row="1">
+
+                <VerticalStackLayout Spacing="16">
+
+                    <Frame BackgroundColor="#1C1C26" Padding="16" CornerRadius="10">
+                        <Label Text="{Binding Report.Total_Sales, StringFormat='Общая выручка: {0} р.'}"
+                           TextColor="#22cc88"
+                           FontSize="18"/>
+                    </Frame>
+
+                    <Frame BackgroundColor="#1C1C26" Padding="16" CornerRadius="10">
+                        <Label Text="{Binding Report.Completed_Orders, StringFormat='Доставлено заказов: {0}'}"
+                           TextColor="White"
+                           FontSize="18"/>
+                    </Frame>
+
+                    <Frame BackgroundColor="#1C1C26" Padding="16" CornerRadius="10">
+                        <Label Text="{Binding Report.Avg_Check, StringFormat='Средний чек: {0} р.'}"
+                           TextColor="#00cccc"
+                           FontSize="18"/>
+                    </Frame>
+
+                    <Label Text="Топ товаров:"
+                       TextColor="White"
+                       FontSize="20"
+                       FontAttributes="Bold"/>
+
+                    <CollectionView ItemsSource="{Binding Report.Top_Products}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BackgroundColor="#1C1C26" Padding="12" CornerRadius="10">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <Label Text="{Binding Name}" TextColor="White"/>
+                                        <Label Grid.Column="1"
+                                           Text="{Binding Qty, StringFormat='{0} шт'}"
+                                           TextColor="#22cc88"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </VerticalStackLayout>
+
+            </ScrollView>
+
+        </Grid>
+    </ContentPage>

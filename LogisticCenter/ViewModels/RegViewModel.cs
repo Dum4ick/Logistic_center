@@ -44,7 +44,7 @@ namespace LogisticCenter.ViewModels
         private string regResponse;
 
         [RelayCommand]
-        private async void Registration()
+        private async Task Registration()
         {
             if (!checkInfo(Username, Useremail, Userpassword))
                 return;
@@ -60,11 +60,14 @@ namespace LogisticCenter.ViewModels
 
             var resultMessage = await api.RegisterUser(user);
             RegResponse = resultMessage;
+            Console.WriteLine("resultMessage: " + resultMessage);
 
-            if (resultMessage == "OK")
+            if (resultMessage == "Регистрация прошла успешно")
             {
                 var (success, loggedUser, _) =
                     await api.LoginAsync(Useremail, Userpassword);
+
+                Console.WriteLine("Ответ: "+success);
 
                 if (success)
                 {

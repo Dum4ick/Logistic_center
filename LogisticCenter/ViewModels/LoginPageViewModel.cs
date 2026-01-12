@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using LogisticCenter.Data;
 using LogisticCenter.Services;
 using LogisticCenter.ViewModels;
@@ -28,9 +29,10 @@ public partial class LoginPageViewModel : ObservableObject
 
         if (success)
         {
-            // ✅ сохраняем пользователя
+            // сохраняем пользователя
             UserSession.Instance.SetUser(user);
-
+            WeakReferenceMessenger.Default.Send(new RoleChangedMessage("UserChanged"));
+            WeakReferenceMessenger.Default.Send(new OrdersChangedMessage("UserChanged"));
             await Shell.Current.GoToAsync("//main");
         }
         else

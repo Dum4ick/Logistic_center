@@ -46,8 +46,44 @@
         Route="shipment" />
 
     <ShellContent
+        Title="ShipmentDetails"
+        ContentTemplate="{DataTemplate local:ShipmentDetailsPage}"
+        Route="shipmentdetails" />
+
+    <ShellContent
         Title="Stock"
         ContentTemplate="{DataTemplate local:StockPage}"
         Route="stock" />
 
+    <ShellContent
+        Title="CreateOrder"
+        ContentTemplate="{DataTemplate local:CreateOrderPage}"
+        Route="createorder" />
+
+    <ShellContent
+        Title="OrderDetails"
+        ContentTemplate="{DataTemplate local:OrderDetailsPage}"
+        Route="orderdetails" />
+
+    <ShellContent
+        Title="Warehouses"
+        ContentTemplate="{DataTemplate local:WarehousesPage}"
+        Route="warehouses" />
+
+    <ShellContent
+        Title="StockReportPage"
+        ContentTemplate="{DataTemplate local:StockReportPage}"
+        Route="stockreport" />
+    
+    <ShellContent
+        Title="ShipmentReportPage"
+        ContentTemplate="{DataTemplate local:ShipmentReportPage}"
+        Route="shipmentreport" />
+    
+    <ShellContent
+        Title="FinanceReportPage"
+        ContentTemplate="{DataTemplate local:FinanceReportPage}"
+        Route="financereport" />
+
+    
 </Shell>

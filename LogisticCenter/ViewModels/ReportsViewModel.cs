@@ -1,32 +1,28 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
 
 namespace LogisticCenter.ViewModels;
 
 public partial class ReportsViewModel : ObservableObject
 {
-    public ObservableCollection<ReportItemModel> Reports { get; } = new();
+    public RoleService Roles => RoleService.Instance;
 
-    public ReportsViewModel()
+    [RelayCommand]
+    async Task OpenStockReport()
     {
-        Reports.Add(new ReportItemModel
-        {
-            Title = "Отчёт по остаткам",
-            Description = "Актуальные данные по складам"
-        });
+        await Shell.Current.GoToAsync("//stockreport");
+    }
 
-        Reports.Add(new ReportItemModel
-        {
-            Title = "Отчёт по отгрузкам",
-            Description = "История доставок"
-        });
+    [RelayCommand]
+    async Task OpenShipmentReport()
+    {
+        await Shell.Current.GoToAsync("//shipmentreport");
+    }
 
-        Reports.Add(new ReportItemModel
-        {
-            Title = "Финансовый отчёт",
-            Description = "Доходы и расходы"
-        });
+    [RelayCommand]
+    async Task OpenFinanceReport()
+    {
+        await Shell.Current.GoToAsync("//financereport");
     }
 
     [RelayCommand]
@@ -34,10 +30,4 @@ public partial class ReportsViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync("//main");
     }
-}
-
-public class ReportItemModel
-{
-    public string Title { get; set; }
-    public string Description { get; set; }
 }

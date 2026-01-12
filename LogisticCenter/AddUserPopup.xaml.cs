@@ -5,9 +5,9 @@ namespace LogisticCenter;
 
 public partial class AddUserPopup : Popup
 {
-    public AddUserPopup(UsersViewModel usersVm)
+    public AddUserPopup(UsersViewModel users)
     {
         InitializeComponent();
-        BindingContext = new AddUserPopupViewModel(this, usersVm);
+        BindingContext = new AddUserPopupViewModel(this, users);
     }
 }

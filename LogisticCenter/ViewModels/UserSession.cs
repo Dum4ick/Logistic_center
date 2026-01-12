@@ -16,6 +16,7 @@ namespace LogisticCenter.Services
         private string username;
         private string email;
         private string fullName;
+        private string roleId; 
 
         public string Id
         {
@@ -41,6 +42,14 @@ namespace LogisticCenter.Services
             set => SetProperty(ref fullName, value);
         }
 
+        public string RoleId
+        {
+            get => roleId;
+            set => SetProperty(ref roleId, value);
+        }
+
+
+
         //сохранение данного пользователя
         public void SetUser(UserModel user)
         {
@@ -48,6 +57,7 @@ namespace LogisticCenter.Services
             Username = user.Name;
             Email = user.Email;
             FullName = user.FullName;
+            RoleId = user.RoleId;
 
             SaveToStorage();
         }
@@ -59,6 +69,7 @@ namespace LogisticCenter.Services
             Preferences.Set("username", Username);
             Preferences.Set("email", Email);
             Preferences.Set("full_name", FullName);
+            Preferences.Set("role_id", RoleId);
         }
 
         //загрузка при старте
@@ -68,6 +79,7 @@ namespace LogisticCenter.Services
             Username = Preferences.Get("username", null);
             Email = Preferences.Get("email", null);
             FullName = Preferences.Get("full_name", null);
+            RoleId = Preferences.Get("role_id", null);
         }
 
         //выход
@@ -79,6 +91,7 @@ namespace LogisticCenter.Services
             Username = null;
             Email = null;
             FullName = null;
+            RoleId = null;
         }
 
         public bool IsLoggedIn => !string.IsNullOrEmpty(Id);

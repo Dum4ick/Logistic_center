@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="LogisticCenter.SelectStockPopup"
+             Color="Transparent">
+
+    <Frame BackgroundColor="#14141A"
+           CornerRadius="10"
+           Padding="10"
+           WidthRequest="350"
+           HeightRequest="500">
+
+        <Grid Padding="20"
+              RowDefinitions="Auto,Auto,*,Auto"
+              RowSpacing="16">
+
+            <Label Grid.Row="0"
+                   Text="Выберите товар"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+
+            <!-- Поиск -->
+            <Border Grid.Row="1"
+                    Stroke="#00cccc"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 10"
+                    Padding="10"
+                    HeightRequest="50">
+
+                <Grid ColumnDefinitions="Auto,*">
+                    <Button Text="🔍"
+                            BackgroundColor="Transparent"
+                            TextColor="#00cccc"
+                            HeightRequest="50"/>
+
+                    <Entry Grid.Column="1"
+                           Placeholder="Поиск"
+                           Text="{Binding SearchText}"
+                           TextColor="White"
+                           PlaceholderColor="#777"
+                           HeightRequest="50"/>
+                </Grid>
+            </Border>
+
+            <!-- Список товаров -->
+            <CollectionView Grid.Row="2"
+                            ItemsSource="{Binding Products}"
+                            SelectedItem="{Binding SelectedProduct}"
+                            SelectionMode="Single"
+                            VerticalScrollBarVisibility="Always">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10"
+                           Margin="0,0,0,8"
+                           BackgroundColor="#1C1C26"
+                           CornerRadius="8">
+
+                            <VerticalStackLayout>
+                                <Label Text="{Binding ProductName}"
+                       TextColor="White"
+                       FontAttributes="Bold"/>
+
+                                <Label Text="{Binding Quantity, StringFormat='Остаток: {0}'}"
+                       TextColor="#00cccc"/>
+                            </VerticalStackLayout>
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+
+            </CollectionView>
+
+            <!-- Кнопки -->
+            <HorizontalStackLayout Grid.Row="3"
+                                   Spacing="10"
+                                   HorizontalOptions="Center">
+
+                <Button Text="Отмена"
+                        Command="{Binding CloseCommand}"
+                        BackgroundColor="#FF4D4D"
+                        TextColor="White"/>
+
+                <Button Text="Выбрать"
+                        Command="{Binding SelectCommand}"
+                        BackgroundColor="#00cccc"
+                        TextColor="White"/>
+
+            </HorizontalStackLayout>
+
+        </Grid>
+    </Frame>
+
+</toolkit:Popup>

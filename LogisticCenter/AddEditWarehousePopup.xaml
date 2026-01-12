@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="LogisticCenter.Popups.AddEditWarehousePopup"
+               Color="#80000000">
+
+    <Frame BackgroundColor="#1C1C26"
+           Padding="20"
+           CornerRadius="12"
+           WidthRequest="320">
+
+        <VerticalStackLayout Spacing="12">
+
+            <Label Text="{Binding Title}"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+
+            <Entry Placeholder="Название склада"
+                   Text="{Binding Name}"
+                   TextColor="White"
+                   PlaceholderColor="#777"
+                   BackgroundColor="#1C1C26"
+                   MaxLength="50"/>
+
+            <Entry Placeholder="Адрес"
+                   Text="{Binding Address}"
+                   TextColor="White"
+                   PlaceholderColor="#777"
+                   BackgroundColor="#1C1C26"
+                   MaxLength="100"/>
+
+            <Button Text="{Binding SaveText}"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#00cccc"
+                    TextColor="Black"/>
+
+            <Button Text="Отмена"
+                    Command="{Binding CloseCommand}"
+                    BackgroundColor="#FF4D4D"
+                    TextColor="White"/>
+
+        </VerticalStackLayout>
+
+    </Frame>
+</toolkit:Popup>

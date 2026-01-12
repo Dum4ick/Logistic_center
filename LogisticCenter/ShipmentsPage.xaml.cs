@@ -7,7 +7,7 @@ public partial class ShipmentsPage : ContentPage
 	public ShipmentsPage()
 	{
 
-		InitializeComponent();
+        InitializeComponent();
         BindingContext = new ShipmentsViewModel();
     }
 }

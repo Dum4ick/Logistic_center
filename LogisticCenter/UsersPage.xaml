@@ -86,7 +86,7 @@
             BackgroundColor="#00cccc"
             TextColor="White"
             CornerRadius="10"
-            Margin="5,0,5,0"/>
+            Margin="0,0,5,0"/>
 
     <Button Text="Редактировать"
             Command="{Binding EditUserCommand}"
@@ -159,11 +159,11 @@
                                    TextColor="#00cccc"/>
                             </VerticalStackLayout>
 
-                            <Label Text="{Binding Status}"
+                            <!--<Label Text="{Binding Status}"
                                    Grid.Column="1"
                                    VerticalOptions="Center"
                                    TextColor="{Binding StatusColor}"
-                                   FontAttributes="Bold"/>
+                                   FontAttributes="Bold"/>-->
 
                         </Grid>
                     </Frame>

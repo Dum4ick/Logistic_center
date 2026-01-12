@@ -3,8 +3,11 @@
              x:Class="LogisticCenter.ShipmentsPage"
              BackgroundColor="#121212">
 
-    <Grid Padding="20" RowDefinitions="Auto,Auto,*">
+    <Grid Padding="20"
+          RowDefinitions="Auto,Auto,*"
+          RowSpacing="16">
 
+        <!-- HEADER -->
         <Grid ColumnDefinitions="Auto,*">
             <Label Text="Отгрузки"
                    FontSize="26"
@@ -15,36 +18,97 @@
                     Text="↩ Вернуться"
                     Command="{Binding GoBackCommand}"
                     BackgroundColor="#1C1C26"
-                    BorderWidth="2"
                     BorderColor="#00cccc"
+                    BorderWidth="2"
                     TextColor="White"
                     CornerRadius="10"
                     HorizontalOptions="End"/>
         </Grid>
 
-        <FlexLayout Grid.Row="1" Padding="10">
-            <Button Text="Создать отгрузку"
-                    BackgroundColor="#00cccc"
+        <!-- SEARCH + FILTER -->
+        <FlexLayout Grid.Row="1"
+                    Wrap="Wrap"
+                    AlignItems="Center">
+
+            <!-- SEARCH -->
+            <Border Padding="10"
+                    BackgroundColor="#1C1C26"
+                    Stroke="#00cccc"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 10"
+                    FlexLayout.Basis="300"
+                    FlexLayout.Grow="1"
+                    HeightRequest="50">
+
+                <Grid ColumnDefinitions="Auto,*">
+
+                    <Button Text="🔍"
+                            FontSize="18"
+                            TextColor="#00cccc"
+                            BackgroundColor="Transparent"
+                            VerticalOptions="Center"
+                            HeightRequest="50"/>
+
+                    <Entry Grid.Column="1"
+                           Placeholder="Поиск по № отгрузки или заказу"
+                           Text="{Binding SearchText}"
+                           TextColor="White"
+                           PlaceholderColor="#777"
+                           BackgroundColor="Transparent"
+                           ClearButtonVisibility="WhileEditing"
+                           HeightRequest="50"/>
+                </Grid>
+            </Border>
+
+            <!-- STATUS -->
+            <Picker ItemsSource="{Binding Statuses}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedStatus}"
+                    WidthRequest="160"
+                    HeightRequest="50"
+                    BackgroundColor="#1C1C26"
                     TextColor="White"
-                    CornerRadius="10"/>
+                    Margin="5,0"/>
         </FlexLayout>
 
-        <CollectionView Grid.Row="2">
+        <!-- LIST -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Shipments}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedShipment}"
+                        SelectionChangedCommand="{Binding OpenShipmentCommand}">
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="15" BackgroundColor="#1C1C26">
-                        <VerticalStackLayout>
-                            <Label Text="Отгрузка №987"
+                    <Frame Padding="15"
+                           BackgroundColor="#1C1C26"
+                           CornerRadius="10"
+                           Margin="0,0,0,10">
+
+                        <VerticalStackLayout Spacing="4">
+
+                            <Label Text="{Binding Id, StringFormat='Отгрузка №{0}'}"
                                    FontAttributes="Bold"
                                    TextColor="White"/>
-                            <Label Text="Дата: 12.05.2025"
+
+                            <Label Text="{Binding OrderId, StringFormat='Заказ №{0}'}"
                                    TextColor="#C7C7D1"/>
-                            <Label Text="Статус: Отправлена"
+
+                            <Label Text="{Binding WarehouseName}"
+                                   TextColor="#C7C7D1"/>
+
+                            <Label Text="{Binding StatusName}"
                                    TextColor="#00cccc"/>
+
+                            <Label Text="{Binding CreatedAt, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}"
+                                   FontSize="12"
+                                   TextColor="#777"/>
                         </VerticalStackLayout>
+
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+
         </CollectionView>
 
     </Grid>

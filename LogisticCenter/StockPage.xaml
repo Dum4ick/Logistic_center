@@ -1,11 +1,13 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LogisticCenter.StockPage"
              BackgroundColor="#121212">
 
-    <Grid Padding="20" RowDefinitions="Auto,Auto,*">
+    <Grid Padding="20"
+          RowDefinitions="Auto,Auto,*"
+          RowSpacing="10">
 
+        <!-- Заголовок -->
         <Grid ColumnDefinitions="Auto,*">
             <Label Text="Остатки"
                    FontSize="26"
@@ -13,70 +15,99 @@
                    TextColor="White"/>
 
             <Button Grid.Column="1"
-                Text='↩ Вернуться'
-                Command="{Binding GoBackCommand}"
-                BackgroundColor="#1C1C26"
-                BorderColor="#00cccc"
-                BorderWidth="2"
-                TextColor="White"
-                CornerRadius="10"
-                HeightRequest="44"
-                HorizontalOptions="End"/>
+                    Text="↩ Вернуться"
+                    Command="{Binding GoBackCommand}"
+                    BackgroundColor="#1C1C26"
+                    BorderColor="#00cccc"
+                    BorderWidth="2"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HorizontalOptions="End"/>
         </Grid>
 
-        <FlexLayout Grid.Row="1" Wrap="Wrap" Padding="10">
+        <!-- Поиск + кнопка -->
+        <FlexLayout Grid.Row="1"
+                    Wrap="Wrap"
+                    AlignItems="Center">
+
             <Border Padding="10"
-                BackgroundColor="#1C1C26"
-                Stroke="#00cccc"
-                StrokeThickness="2"
-                StrokeShape="RoundRectangle 10"
-                FlexLayout.Basis="300"
-                FlexLayout.Grow="1"
-                HeightRequest="50">
+                    BackgroundColor="#1C1C26"
+                    Stroke="#00cccc"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 10"
+                    FlexLayout.Grow="1"
+                    HeightRequest="50">
 
                 <Grid ColumnDefinitions="Auto,*">
-
                     <Button Text="🔍"
-                       FontSize="18"
-                       TextColor="#00cccc"
-                       VerticalOptions="Center"
-                       BackgroundColor="Transparent"
-                       HeightRequest="50"/>
+                            Command="{Binding SearchCommand}"
+                            BackgroundColor="Transparent"
+                            TextColor="#00cccc"
+                            HeightRequest="50"/>
 
                     <Entry Grid.Column="1"
-                       Placeholder="Поиск по товару или складу"
-                       TextColor="White"
-                       PlaceholderColor="#777"
-                       BackgroundColor="Transparent"
-                       ClearButtonVisibility="WhileEditing"
-                       HeightRequest="50"/>
-
+                           Placeholder="Поиск по товару или складу"
+                           Text="{Binding SearchText}"
+                           TextColor="White"
+                           PlaceholderColor="#777"
+                           BackgroundColor="Transparent"
+                           HeightRequest="50"/>
                 </Grid>
             </Border>
+
+            <Button Text="Поступление"
+                    Command="{Binding AddCommand}"
+                    BackgroundColor="#00cccc"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Margin="5,0,0,0"/>
+
+            <Button Text="Списание"
+                Command="{Binding WriteOffCommand}"
+                BackgroundColor="#FF5353"
+                TextColor="White"
+                CornerRadius="10"
+                Margin="5,0,0,0"/>
+
         </FlexLayout>
 
-        <CollectionView Grid.Row="2">
+        <!-- Список -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Stocks}"
+                        SelectedItem="{Binding SelectedStock}"
+                        SelectionMode="Single">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    Orientation="Vertical"
+                    Span="3"
+                    HorizontalItemSpacing="10"
+        VerticalItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Border Padding="15"
-                            BackgroundColor="#1C1C26"
-                            Stroke="#00cccc"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 10">
+                    <Frame Padding="16"
+                           BackgroundColor="#1C1C26"
+                           CornerRadius="10">
 
-                        <VerticalStackLayout>
-                            <Label Text="Товар: Монитор Samsung"
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding ProductName}"
                                    FontAttributes="Bold"
                                    TextColor="White"/>
-                            <Label Text="Склад: Центральный"
+
+                            <Label Text="{Binding WarehouseName}"
                                    TextColor="#C7C7D1"/>
-                            <Label Text="Остаток: 42 шт."
+
+                            <Label Text="{Binding Quantity, StringFormat='Остаток: {0} шт.'}"
                                    TextColor="#00cccc"/>
                         </VerticalStackLayout>
 
-                    </Border>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+
         </CollectionView>
 
     </Grid>

@@ -1,27 +1,61 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using LogisticCenter.Data;
 using LogisticCenter.Services;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using LogisticCenter.Data;
 
 namespace LogisticCenter.ViewModels
 {
     public partial class MainMenuViewModel : ObservableObject
     {
+        public RoleService Roles => RoleService.Instance;
+
+        // ===== РОЛИ =====
+        public bool IsAdmin => UserSession.Instance.RoleId == "3";
+        public bool IsManager => UserSession.Instance.RoleId == "2";
+        public bool IsUser => UserSession.Instance.RoleId == "1";
+
+        // ===== УРОВНИ ДОСТУПА =====
+        public bool Level3 => IsAdmin;                     
+        public bool Level2 => IsAdmin || IsManager;       
+        public bool Level1 => IsAdmin || IsManager || IsUser; 
+
         public MainMenuViewModel()
         {
+            // Подписываемся на изменения UserSession
             UserSession.Instance.PropertyChanged += OnUserSessionChanged;
+
+            // Обновляем состояние ролей при загрузке
+            RefreshRoleState();
         }
 
-        private void OnUserSessionChanged(object sender, PropertyChangedEventArgs e)
+        // Обновление ролей и данных пользователя
+        public void RefreshRoleState()
         {
+            OnPropertyChanged(nameof(IsAdmin));
+            OnPropertyChanged(nameof(IsManager));
+            OnPropertyChanged(nameof(IsUser));
+
+            OnPropertyChanged(nameof(Level1));
+            OnPropertyChanged(nameof(Level2));
+            OnPropertyChanged(nameof(Level3));
+
             OnPropertyChanged(nameof(FullName));
             OnPropertyChanged(nameof(Username));
             OnPropertyChanged(nameof(Email));
         }
 
-        // ===== ДАННЫЕ ПОЛЬЗОВАТЕЛЯ =====
+        private void OnUserSessionChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(UserSession.RoleId))
+                RefreshRoleState();
+
+            if (e.PropertyName == nameof(UserSession.FullName) ||
+                e.PropertyName == nameof(UserSession.Username) ||
+                e.PropertyName == nameof(UserSession.Email))
+                RefreshRoleState();
+        }
 
         public string FullName =>
             !string.IsNullOrWhiteSpace(UserSession.Instance.FullName)
@@ -29,23 +63,14 @@ namespace LogisticCenter.ViewModels
                 : UserSession.Instance.Username;
 
         public string Username => $"@{UserSession.Instance.Username}";
-
         public string Email => UserSession.Instance.Email ?? string.Empty;
-
-        // ===== СОСТОЯНИЕ МЕНЮ ПРОФИЛЯ =====
 
         [ObservableProperty]
         private bool isProfileMenuVisible;
 
-        // ===== КОМАНДЫ =====
-
         [RelayCommand]
-        void ToggleProfileMenu()
-        {
-            IsProfileMenuVisible = !IsProfileMenuVisible;
-        }
+        void ToggleProfileMenu() => IsProfileMenuVisible = !IsProfileMenuVisible;
 
-        // 🔹 НАЗНАЧЕНИЕ ИМЕНИ (ТО ЧТО ТЕБЕ НУЖНО)
         [RelayCommand]
         async Task SetFullName()
         {
@@ -54,11 +79,9 @@ namespace LogisticCenter.ViewModels
             string result = await Shell.Current.DisplayPromptAsync(
                 "Назначить имя",
                 "Введите имя (до 200 символов)",
-                accept: "Сохранить",
-                cancel: "Отмена",
+                "Сохранить", "Отмена",
                 placeholder: "Полное имя",
-                maxLength: 200,
-                keyboard: Keyboard.Text
+                maxLength: 200
             );
 
             if (string.IsNullOrWhiteSpace(result))
@@ -71,31 +94,18 @@ namespace LogisticCenter.ViewModels
             );
 
             if (response == "OK")
-            {
                 UserSession.Instance.FullName = result.Trim();
-            }
             else
-            {
-                await Shell.Current.DisplayAlert(
-                    "Ошибка",
-                    response,
-                    "OK"
-                );
-            }
+                await Shell.Current.DisplayAlert("Ошибка", response, "OK");
         }
 
-        // ===== ВЫХОД С ПОДТВЕРЖДЕНИЕМ =====
         [RelayCommand]
         async Task Logout_Clicked()
         {
             IsProfileMenuVisible = false;
 
             bool confirm = await Shell.Current.DisplayAlert(
-                "Выход",
-                "Вы действительно хотите выйти из аккаунта?",
-                "Да",
-                "Отмена"
-            );
+                "Выход", "Вы действительно хотите выйти?", "Да", "Отмена");
 
             if (!confirm) return;
 
@@ -109,56 +119,22 @@ namespace LogisticCenter.ViewModels
             IsProfileMenuVisible = false;
 
             bool confirm = await Shell.Current.DisplayAlert(
-                "Выход",
-                "Вы действительно хотите выйти?",
-                "Да",
-                "Отмена"
-            );
+                "Выход", "Вы действительно хотите выйти?", "Да", "Отмена");
 
             if (!confirm) return;
 
             Application.Current.Quit();
         }
 
-        [RelayCommand]
-        async Task GoToUsers()
-        {
-            await Shell.Current.GoToAsync("//users");
-        }
+        [RelayCommand] async Task GoToUsers() => await Shell.Current.GoToAsync("//users");
+        [RelayCommand] async Task GoToProducts() => await Shell.Current.GoToAsync("//products");
+        [RelayCommand] async Task GoToOrders() => await Shell.Current.GoToAsync("//orders");
+        [RelayCommand] async Task GoToStock() => await Shell.Current.GoToAsync("//stock");
+        [RelayCommand] async Task GoToShipment() => await Shell.Current.GoToAsync("//shipment");
+        [RelayCommand] async Task GoToWarehouses() => await Shell.Current.GoToAsync("//warehouses");
+        [RelayCommand] async Task GoToReports() => await Shell.Current.GoToAsync("//reports");
 
-        [RelayCommand]
-        async Task GoToProducts()
-        {
-            await Shell.Current.GoToAsync("//products");
 
-        }
 
-        [RelayCommand]
-        async Task GoToOrders()
-        {
-            await Shell.Current.GoToAsync("//orders");
-
-        }
-
-        [RelayCommand]
-        async Task GoToStock()
-        {
-            await Shell.Current.GoToAsync("//stock");
-
-        }
-
-        [RelayCommand]
-        async Task GoToShipment()
-        {
-            await Shell.Current.GoToAsync("//shipment");
-
-        }
-
-        [RelayCommand]
-        async Task GoToReports()
-        {
-            await Shell.Current.GoToAsync("//reports");
-
-        }
     }
 }

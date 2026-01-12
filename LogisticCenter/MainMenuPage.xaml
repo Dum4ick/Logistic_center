@@ -2,55 +2,47 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LogisticCenter.MainMenuPage"
+             
              BackgroundColor="#0B0B0F">
 
-    <!-- ===== КОРНЕВОЙ GRID (2 СЛОЯ) ===== -->
     <Grid>
 
-        <!-- ================= ОСНОВНОЙ КОНТЕНТ ================= -->
         <Grid ColumnDefinitions="240,*">
-
-            <!-- ===== ЛЕВАЯ ПАНЕЛЬ ===== -->
-            <!--<Border Grid.Column="0"
-                    Margin="10"
-                    Stroke="#8B5CF6"
-                    StrokeThickness="2"
-                    StrokeShape="RoundRectangle 20"
-                    BackgroundColor="#14141A">-->
 
             <VerticalStackLayout Padding="20" Spacing="16" BackgroundColor="#14141A">
 
-                    <Label Text="LOGISTIC CENTER"
+                <Label Text="LOGISTIC CENTER"
                            FontSize="18"
                            FontAttributes="Bold"
                            TextColor="#00cccc"
                            HorizontalOptions="Center"/>
 
-                    <Button Text="Товары"
+                <Button Text="Товары"
                             BackgroundColor="#1C1C26"
                             TextColor="White"
                             CornerRadius="10"
                             Command="{Binding GoToProductsCommand}"/>
 
-                    <Button Text="Заказы"
+                <Button Text="Заказы"
                             BackgroundColor="#1C1C26"
                             TextColor="White"
                             CornerRadius="10"
                             Command="{Binding GoToOrdersCommand}"/>
 
-                    <Button Text="Остатки"
+                <Button Text="Остатки"
                             BackgroundColor="#1C1C26"
                             TextColor="White"
                             CornerRadius="10"
-                            Command="{Binding GoToStockCommand}"/>
+                            Command="{Binding GoToStockCommand}"
+                            IsVisible="{Binding Roles.Level2}"/>
 
-                    <Button Text="Склады"
+                <Button Text="Склады"
                             BackgroundColor="#1C1C26"
                             TextColor="White"
                             CornerRadius="10"
                             Command="{Binding GoToWarehousesCommand}"/>
 
-                    <Button Text="Отгрузки"
+                <Button Text="Отгрузки"
                         BackgroundColor="#1C1C26"
                         TextColor="White"
                         CornerRadius="10"
@@ -60,18 +52,19 @@
                     BackgroundColor="#1C1C26"
                     TextColor="White"
                     CornerRadius="10"
-                    Command="{Binding GoToReportsCommand}"/>
+                    Command="{Binding GoToReportsCommand}"
+                    IsVisible="{Binding Roles.Level2}"/>
 
                 <Button Text="Пользователи"
-                                    BackgroundColor="#1C1C26"
-                                    TextColor="White"
-                                    CornerRadius="10"
-                                    Command="{Binding GoToUsersCommand}"/>
+                    BackgroundColor="#1C1C26"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Command="{Binding GoToUsersCommand}"
+                    IsVisible="{Binding Roles.Level3}"/>
 
-                        
+
 
             </VerticalStackLayout>
-            <!--</Border>-->
 
 
             <Button

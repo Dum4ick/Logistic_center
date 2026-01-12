@@ -1,0 +1,78 @@
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="LogisticCenter.AddStockPopup"
+    Color="Transparent">
+
+    <Frame BackgroundColor="#14141A" CornerRadius="10" Padding="10">
+        
+        <VerticalStackLayout Padding="20" Spacing="16" VerticalOptions="Center">
+
+            <Label Text="Поступление товара"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"/>
+
+            <!-- Товар -->
+            <Border Stroke="#00cccc"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 10"
+                Padding="10">
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="{Binding SelectedProduct.Name, FallbackValue='Выберите товар'}"
+       TextColor="White"
+       VerticalOptions="Center"/>
+
+
+                    <Button Grid.Column="1"
+                Text="🔍"
+                Command="{Binding SelectProductCommand}"
+                BackgroundColor="Transparent"
+                TextColor="#00cccc"/>
+                </Grid>
+            </Border>
+
+
+            <!-- Склад -->
+            <Picker Title="Склад"
+                    ItemsSource="{Binding Warehouses}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedWarehouse}"
+                    BackgroundColor="#1C1C26"
+                    TextColor="White"/>
+
+            <!-- Количество -->
+            <Border Stroke="#00cccc"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 10">
+                <Entry Placeholder="Количество"
+                       Keyboard="Numeric"
+                       Text="{Binding Quantity}"
+                       TextColor="White"
+                       PlaceholderColor="#777"/>
+            </Border>
+
+            <HorizontalStackLayout Spacing="10"
+                                   HorizontalOptions="Center">
+
+                <Button Text="Отмена"
+                        Command="{Binding CloseCommand}"
+                        BackgroundColor="#FF4D4D"
+                        TextColor="White"
+                        CornerRadius="10"
+/>
+
+                <Button Text="Сохранить"
+                        Command="{Binding SaveCommand}"
+                        BackgroundColor="#00cccc"
+                        TextColor="White"
+                        CornerRadius="10"/>
+
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </Frame>
+</toolkit:Popup>

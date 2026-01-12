@@ -6,7 +6,7 @@ public partial class OrdersPage : ContentPage
 {
 	public OrdersPage()
 	{
-		InitializeComponent();
+        InitializeComponent();
         BindingContext = new OrdersViewModel();
     }
 }

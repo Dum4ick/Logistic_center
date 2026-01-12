@@ -1,0 +1,98 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LogisticCenter.ShipmentDetailsPage"
+             BackgroundColor="#121212">
+
+    <Grid Padding="20" RowDefinitions="Auto,Auto,*">
+
+        <!-- HEADER -->
+        <Grid ColumnDefinitions="Auto,*">
+            <Label Text="Состав отгрузки"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+
+            <Button Text="↩ Назад"
+                    Command="{Binding GoBackCommand}"
+                    Grid.Column="1"
+                    HorizontalOptions="End"
+                    BackgroundColor="#1C1C26"
+                    BorderColor="#00cccc"
+                    BorderWidth="2"
+                    TextColor="White"/>
+        </Grid>
+
+        <!-- STATUS + ACTIONS -->
+        <Frame Grid.Row="1"
+               Padding="12"
+               BackgroundColor="#1C1C26"
+               CornerRadius="10">
+
+            <VerticalStackLayout Spacing="12">
+
+                <!-- STATUS -->
+                <Label Text="Статус отгрузки:"
+                       TextColor="White"/>
+
+                <Label Text="{Binding StatusName}"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="#00cccc"/>
+
+                <!-- ACTION BUTTONS -->
+                <Button Text="Начать отгрузку"
+                        Command="{Binding StartShipmentCommand}"
+                        IsVisible="{Binding CanStart}"
+                        BackgroundColor="#ffaa00"
+                        TextColor="Black"/>
+
+                <Button Text="Отправить в доставку"
+                        Command="{Binding SendToDeliveryCommand}"
+                        IsVisible="{Binding CanSendToDelivery}"
+                        BackgroundColor="#ffaa00"
+                        TextColor="Black"/>
+
+                <Button Text="Завершить доставку"
+                        Command="{Binding CompleteShipmentCommand}"
+                        IsVisible="{Binding CanComplete}"
+                        BackgroundColor="#22cc88"
+                        TextColor="White"/>
+
+                <Button Text="Отменить отгрузку"
+                        Command="{Binding CancelShipmentCommand}"
+                        IsVisible="{Binding CanCancel}"
+                        BackgroundColor="Red"
+                        TextColor="White"/>
+
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- ITEMS -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Items}"
+                        VerticalScrollBarVisibility="Always">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="12"
+                           Margin="0,0,0,10"
+                           BackgroundColor="#1C1C26"
+                           CornerRadius="10">
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding ProductName}"
+                                   FontAttributes="Bold"
+                                   TextColor="White"/>
+
+                            <Label Text="{Binding Quantity, StringFormat='Кол-во: {0}'}"
+                                   TextColor="#00cccc"/>
+                        </VerticalStackLayout>
+
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

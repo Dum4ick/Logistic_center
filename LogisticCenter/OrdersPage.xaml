@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LogisticCenter.OrdersPage"
+             xmlns:vm="clr-namespace:LogisticCenter.ViewModels"
              BackgroundColor="#121212">
 
     <Grid Padding="20" RowDefinitions="Auto,Auto,*" RowSpacing="16">
@@ -46,45 +46,78 @@
 
                     <Entry Grid.Column="1"
                        Placeholder="Поиск по номеру заказа или клиенту"
+                       Text="{Binding SearchText}"
                        TextColor="White"
                        PlaceholderColor="#777"
                        BackgroundColor="Transparent"
                        ClearButtonVisibility="WhileEditing"
                        HeightRequest="50"/>
-
+                    
                 </Grid>
             </Border>
 
-            <Button Text="Создать заказ"
+            <Picker
+                ItemsSource="{Binding Statuses}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedStatus}"
+                WidthRequest="160"
+                HeightRequest="50"
+                BackgroundColor="#1C1C26"
+                TextColor="White"
+                Margin="5,0,5,0"/>
+
+
+            <Button Command="{Binding CreateOrderCommand}"
+            Text="Создать заказ"
             BackgroundColor="#00cccc"
             TextColor="White"
             CornerRadius="10"
             Margin="5,0,5,0"/>
-
-            <Button Text="Удалить"
-            BackgroundColor="#FF4D4D"
-            TextColor="White"
-            CornerRadius="10"/>
         </FlexLayout>
 
         <!-- ===== СПИСОК ЗАКАЗОВ ===== -->
-        <CollectionView Grid.Row="2">
+        <CollectionView Grid.Row="2"
+                ItemsSource="{Binding Orders}"
+                SelectionMode="None">
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="15" BackgroundColor="#1C1C26">
-                        <VerticalStackLayout>
-                            <Label Text="Заказ №12345"
-                                   FontAttributes="Bold"
-                                   TextColor="White"/>
-                            <Label Text="Клиент: ООО Ромашка"
-                                   TextColor="#C7C7D1"/>
-                            <Label Text="Статус: В обработке"
-                                   TextColor="#00cccc"/>
+                    <Frame Padding="15"
+                   BackgroundColor="#1C1C26"
+                   CornerRadius="10"
+                   Margin="0,0,0,10">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:OrdersViewModel}}, Path=OpenOrderCommand}"
+                        CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="{Binding Id, StringFormat='Заказ №{0}'}"
+                           FontAttributes="Bold"
+                           TextColor="White"/>
+
+                            <Label Text="{Binding UserName}"
+                           TextColor="#C7C7D1"/>
+
+                            <Label Text="{Binding WarehouseName}"
+                           TextColor="#C7C7D1"/>
+
+                            <Label Text="{Binding StatusName}"
+                           TextColor="#00cccc"/>
+
+                            <Label Text="{Binding CreatedAt, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}"
+                           FontSize="12"
+                           TextColor="#777"/>
                         </VerticalStackLayout>
+
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+
 
     </Grid>
 </ContentPage>

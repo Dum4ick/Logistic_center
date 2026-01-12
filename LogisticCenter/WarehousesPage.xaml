@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LogisticCenter.WarehousesPage"
+             BackgroundColor="#121212">
+
+    <Grid Padding="20"
+          RowDefinitions="Auto,Auto,*"
+          RowSpacing="16">
+
+        <!-- HEADER -->
+        <Grid ColumnDefinitions="Auto,*" VerticalOptions="Center">
+            <Label Text="Склады"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   Margin="12,0,0,0"/>
+
+            <Button Grid.Column="1"
+                    Text="↩ Вернуться"
+                    Command="{Binding GoBackCommand}"
+                    BackgroundColor="#1C1C26"
+                    BorderColor="#00cccc"
+                    BorderWidth="2"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="44"
+                    HorizontalOptions="End"/>
+        </Grid>
+
+        <!-- ACTION BUTTONS -->
+        <FlexLayout Grid.Row="1"
+            Wrap="Wrap"
+            Direction="Row"
+            AlignItems="Center"
+            JustifyContent="Start">
+
+            <Border Padding="10"
+                BackgroundColor="#1C1C26"
+                Stroke="#00cccc"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 10"
+                FlexLayout.Basis="300"
+                FlexLayout.Grow="1"
+                HeightRequest="50"
+                Margin="0,0,5,0">
+
+                <Grid ColumnDefinitions="Auto,*">
+                    <Button Text="🔍"
+                            FontSize="18"
+                            TextColor="#00cccc"
+                            BackgroundColor="Transparent"
+                            Command="{Binding SearchCommand}"
+                            HeightRequest="50"/>
+
+                    <Entry Grid.Column="1"
+                           Placeholder="Поиск по названию или адресу"
+                           Text="{Binding SearchText}"
+                           TextColor="White"
+                           PlaceholderColor="#777"
+                           BackgroundColor="Transparent"
+                           ClearButtonVisibility="WhileEditing"
+                           HeightRequest="50"/>
+                </Grid>
+            </Border>
+
+
+
+            <Button Text="Добавить склад"
+                    Command="{Binding AddWarehouseCommand}"
+                    BackgroundColor="#00cccc"
+                    TextColor="Black"
+                    CornerRadius="10"
+                    Margin="0,0,5,0"
+                    IsVisible="{Binding Roles.Level3}"/>
+
+            <Button Text="Редактировать"
+                    Command="{Binding EditWarehouseCommand}"
+                    BackgroundColor="#1C1C26"
+                    BorderColor="#00cccc"
+                    BorderWidth="2"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Margin="0,0,5,0"
+                    IsVisible="{Binding Roles.Level3}"/>
+
+            <Button Text="Удалить"
+                    Command="{Binding DeleteWarehouseCommand}"
+                    BackgroundColor="#FF4D4D"
+                    TextColor="White"
+                    CornerRadius="10"
+                    IsVisible="{Binding Roles.Level3}"/>
+        </FlexLayout>
+
+        <!-- WAREHOUSE CARDS -->
+        <CollectionView Grid.Row="3"
+                        ItemsSource="{Binding Warehouses}"
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedWarehouse}"
+                        VerticalScrollBarVisibility="Always">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="2"
+                                 VerticalItemSpacing="10"
+                                 HorizontalItemSpacing="10"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="#1C1C26"
+                            Stroke="#00cccc"
+                            StrokeThickness="2"
+                            StrokeShape="RoundRectangle 10"
+                            Padding="16">
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding Name}"
+                                   FontSize="18"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   MaxLines="1"
+                                   LineBreakMode="WordWrap"/>
+
+                            <Label Text="{Binding Address, StringFormat='Адрес: {0}'}"
+                                   FontSize="11"
+                                   TextColor="#C7C7D1"
+                                   MaxLines="2"
+                                   HeightRequest="30"
+                                    LineBreakMode="WordWrap"/>
+
+                            <Label Text="{Binding Id, StringFormat='ID: {0}'}"
+                                   FontSize="12"
+                                   TextColor="#00cccc"/>
+                        </VerticalStackLayout>
+
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

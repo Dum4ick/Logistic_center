@@ -4,25 +4,26 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="LogisticCenter.AssignRolePopup"
-    Size="360,300">
+    Size="360,300"
+    Color="Transparent">
 
     <Frame Padding="16"
         BackgroundColor="#14141A"
-        CornerRadius="10"
-        BorderColor="#00cccc"
-        >
+        CornerRadius="10">
         
-        <VerticalStackLayout Padding="20" Spacing="16">
+        <VerticalStackLayout Padding="20" Spacing="16" VerticalOptions="Center">
 
         <Label Text="Назначить роль"
                FontSize="20"
                FontAttributes="Bold"
-               HorizontalOptions="Center"/>
+               HorizontalOptions="Center"
+               TextColor="White"/>
 
         <Picker Title="Выберите роль"
                 ItemsSource="{Binding Roles}"
                 ItemDisplayBinding="{Binding RoleName}"
-                SelectedItem="{Binding SelectedRole}" />
+                SelectedItem="{Binding SelectedRole}"
+                TitleColor="White"/>
 
         <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
 

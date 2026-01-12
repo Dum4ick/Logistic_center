@@ -1,0 +1,91 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LogisticCenter.CreateOrderPage"
+             BackgroundColor="#121212">
+
+    <Grid Padding="20" RowDefinitions="Auto,Auto,*,Auto">
+
+        <Label Text="Создание заказа"
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="White"/>
+
+        <!-- Склад -->
+        <Picker Grid.Row="1"
+                Title="Склад"
+                ItemsSource="{Binding Warehouses}"
+                ItemDisplayBinding="{Binding Name}"
+                SelectedItem="{Binding SelectedWarehouse}"
+                TextColor="White"/>
+
+        <!-- КОРЗИНА -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Cart}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="#1C1C26"
+               Padding="12"
+               Margin="0,0,0,10"
+               CornerRadius="10">
+
+                        <VerticalStackLayout Spacing="8">
+
+                            <!-- Название -->
+                            <Label Text="{Binding ProductName}"
+                       TextColor="White"
+                       FontAttributes="Bold"/>
+
+                            <!-- Управление количеством -->
+                            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+
+                                <Label Text="Количество:"
+                           TextColor="#C7C7D1"
+                           VerticalOptions="Center"/>
+
+                                <Stepper Minimum="1"
+                             Maximum="{Binding MaxQuantity}"
+                             Value="{Binding Quantity, Mode=TwoWay}" />
+
+                                <Label Text="{Binding Quantity}"
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"/>
+                            </HorizontalStackLayout>
+
+                            <!-- Сумма -->
+                            <Label Text="{Binding Total, StringFormat='Сумма: {0} р.'}"
+                       TextColor="#00cccc"/>
+
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+        <!-- КНОПКИ -->
+        <HorizontalStackLayout Grid.Row="3"
+                       Spacing="10"
+                       HorizontalOptions="Center">
+
+            <Button Text="↩ Назад"
+            Command="{Binding GoBackCommand}"
+            BackgroundColor="#1C1C26"
+            TextColor="White"
+            BorderColor="#00cccc"
+            BorderWidth="2"/>
+
+            <Button Text="Добавить товар"
+            Command="{Binding AddProductCommand}"
+            BackgroundColor="#00cccc"/>
+
+            <Button Text="Создать заказ"
+                Command="{Binding CreateOrderCommand}"
+                IsEnabled="{Binding Cart.Count}"
+                BackgroundColor="#00cc66"/>
+
+        </HorizontalStackLayout>
+
+
+    </Grid>
+</ContentPage>

@@ -17,8 +17,8 @@ namespace LogisticCenter;
 
             private void OnSearchCompleted(object sender, EventArgs e)
             {
-                if (BindingContext is UsersViewModel vm)
-                    vm.SearchCommand.Execute(null);
+                if (BindingContext is UsersViewModel users)
+                users.SearchCommand.Execute(null);
             }
 
 

@@ -3,10 +3,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Class="LogisticCenter.AddUserPopup"
-    Size="400,400">
+    Size="400,400"
+    Color="Transparent">
 
-    <Frame BackgroundColor="#14141A" CornerRadius="10" Padding="0" BorderColor="#00cccc">
-        <VerticalStackLayout Padding="20" Spacing="16">
+    <Frame BackgroundColor="#14141A" CornerRadius="10" Padding="0">
+        <VerticalStackLayout Padding="20" Spacing="16" VerticalOptions="Center">
 
             <Label Text="Добавление пользователя"
                    FontSize="20"

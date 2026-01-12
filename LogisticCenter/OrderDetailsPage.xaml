@@ -1,0 +1,117 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LogisticCenter.OrderDetailsPage"
+             BackgroundColor="#121212">
+
+    <Grid Padding="20"
+          RowDefinitions="Auto,Auto,*,Auto"
+          RowSpacing="16">
+
+        <!-- HEADER -->
+        <Grid ColumnDefinitions="Auto,*">
+            <Label Text="Состав заказа"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   TextColor="White"/>
+
+            <Button Grid.Column="1"
+                    Text="↩ Назад"
+                    Command="{Binding GoBackCommand}"
+                    BackgroundColor="#1C1C26"
+                    BorderColor="#00cccc"
+                    BorderWidth="2"
+                    TextColor="White"
+                    HorizontalOptions="End"/>
+        </Grid>
+
+        <!-- STATUS -->
+        <Frame Grid.Row="1"
+               Padding="12"
+               BackgroundColor="#1C1C26">
+
+            <VerticalStackLayout Spacing="6">
+
+                <Label Text="Статус заказа:"
+                    TextColor="White" />
+
+                <Label Text="{Binding StatusName}"
+                       FontSize="18"
+                       TextColor="#00cccc"
+                       FontAttributes="Bold"/>
+
+
+                <Button Text="Подтвердить заказ"
+                        Command="{Binding ConfirmOrderCommand}"
+                        IsVisible="{Binding CanConfirm}"
+                        BackgroundColor="#00cccc"
+                        TextColor="White"/>
+
+                <Button Text="Отменить заказ"
+                        Command="{Binding CancelOrderCommand}"
+                        IsVisible="{Binding CanCancel}"
+                        BackgroundColor="#FF4D4D"
+                        TextColor="White"/>
+
+                <Button Text="Удалить заказ"
+                        Command="{Binding DeleteOrderCommand}"
+                        IsVisible="{Binding CanDelete}"
+                        BackgroundColor="Red"
+                        TextColor="White"/>
+
+
+
+            </VerticalStackLayout>
+
+        </Frame>
+
+        <!-- ITEMS -->
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Items}"
+                        VerticalScrollBarVisibility="Always">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="#1C1C26"
+                           Padding="12"
+                           Margin="0,0,0,10"
+                           CornerRadius="10">
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="{Binding ProductName}"
+                                   TextColor="White"
+                                   FontAttributes="Bold"/>
+
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Text="{Binding Quantity, StringFormat='Кол-во: {0}'}"
+                                       TextColor="#C7C7D1"/>
+
+                                <Label Text="{Binding Price, StringFormat='Цена: {0} р.'}"
+                                       TextColor="#C7C7D1"/>
+                            </HorizontalStackLayout>
+
+                            <Label Text="{Binding Total, StringFormat='Сумма: {0} р.'}"
+                                   TextColor="#00cccc"/>
+                        </VerticalStackLayout>
+
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- TOTAL -->
+        <Border Grid.Row="3"
+                Padding="15"
+                BackgroundColor="#1C1C26"
+                Stroke="#00cccc"
+                StrokeThickness="2"
+                StrokeShape="RoundRectangle 10">
+
+            <Label Text="{Binding OrderTotal, StringFormat='Итого: {0} р.'}"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#00cccc"
+                   HorizontalOptions="Center"/>
+        </Border>
+
+    </Grid>
+</ContentPage>

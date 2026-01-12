@@ -69,31 +69,39 @@
                 </Grid>
             </Border>
 
+            <Picker
+                ItemsSource="{Binding Categories}"
+                SelectedItem="{Binding SelectedCategory}"
+                BackgroundColor="#1C1C26"
+                TextColor="White"
+                Margin="0,0,5,0"/>
+
+
             <Button Text="Добавить"
                     Command="{Binding AddCommand}"
                     BackgroundColor="#00cccc"
                     TextColor="White"
                     CornerRadius="10"
-                    Margin="0,0,5,0"/>
+                    Margin="0,0,5,0"
+                    IsVisible="{Binding Roles.Level3}"/>
 
             <Button Text="Редактировать"
                     Command="{Binding EditCommand}"
                     BackgroundColor="#1C1C26"
-                    BorderColor="#00cccc"
-                    BorderWidth="2"
                     TextColor="White"
                     CornerRadius="10"
-                    Margin="0,0,5,0"/>
+                    Margin="0,0,5,0"
+                    IsVisible="{Binding Roles.Level3}"/>
 
             <Button Text="Удалить"
                     Command="{Binding DeleteCommand}"
                     BackgroundColor="#FF4D4D"
                     TextColor="White"
-                    CornerRadius="10"/>
+                    CornerRadius="10"
+                    IsVisible="{Binding Roles.Level3}"/>
 
         </FlexLayout>
         
-        <!-- ===== СПИСОК ТОВАРОВ ===== -->
         <CollectionView Grid.Row="2"
                         ItemsSource="{Binding Products}"
                         SelectedItem="{Binding SelectedProduct}"
@@ -111,17 +119,14 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
 
-                    <Border
-                        Padding="15"
+                    <Frame Padding="16"
                         BackgroundColor="#1C1C26"
-                        Stroke="#00cccc"
-                        StrokeThickness="2"
-                        StrokeShape="RoundRectangle 8">
+                        BorderColor="Transparent">
 
                         <VerticalStackLayout Spacing="5">
 
                             <!-- Название -->
-                            <Label Text="{Binding Name}"
+                            <Label Text="{Binding Name }"
                                FontSize="16"
                                FontAttributes="Bold"
                                TextColor="White"/>  
@@ -132,28 +137,20 @@
                             <!-- Вес -->
                             <HorizontalStackLayout Spacing="5">
                                 <Label Text="Вес:" TextColor="#AAAAAA"/>
-                                <Label Text="{Binding Weight}"/>
+                                <Label Text="{Binding Weight}" TextColor="White"/>
                                 <Label Text="кг"/>
                             </HorizontalStackLayout>
 
                             <!-- Цена -->
                             <HorizontalStackLayout Spacing="5">
                                 <Label Text="Цена:" TextColor="#AAAAAA"/>
-                                <Label Text="{Binding Price}"/>
+                                <Label Text="{Binding Price}" TextColor="White"/>
                                 <Label Text="р."/>
-                            </HorizontalStackLayout>
-
-                            <!-- Количество -->
-                            <HorizontalStackLayout Spacing="5">
-                                <Label Text="В наличии:"
-                           TextColor="#AAAAAA"/>
-                                <Label Text="{Binding Quantity}"/>
-                                <Label Text="шт."/>
                             </HorizontalStackLayout>
 
                         </VerticalStackLayout>
 
-                    </Border>
+                    </Frame>
 
                 </DataTemplate>
             </CollectionView.ItemTemplate>

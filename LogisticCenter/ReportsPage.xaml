@@ -1,10 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LogisticCenter.ReportsPage"
              BackgroundColor="#121212">
 
-    <Grid Padding="20" RowDefinitions="Auto,*">
+    <Grid Padding="20" RowDefinitions="Auto,*" RowSpacing="16">
 
+        <!-- HEADER -->
         <Grid ColumnDefinitions="Auto,*">
             <Label Text="Отчёты"
                    FontSize="26"
@@ -22,71 +24,54 @@
                     HorizontalOptions="End"/>
         </Grid>
 
+        <!-- REPORT CARDS -->
         <VerticalStackLayout Grid.Row="1" Spacing="16" Padding="10">
 
+            <!-- STOCK REPORT -->
             <Frame Padding="20"
-               BackgroundColor="#1C1C26"
-               CornerRadius="10"
-               HasShadow="False">
+                   BackgroundColor="#1C1C26"
+                   CornerRadius="10"
+                   HasShadow="False">
 
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer />
+                    <TapGestureRecognizer Command="{Binding OpenStockReportCommand}" />
                 </Frame.GestureRecognizers>
 
-                <Grid ColumnDefinitions="*,Auto"
-                    VerticalOptions="Center">
-
-                    <Label Text="Отчёт по остаткам"
+                <Label Text="Отчёт по остаткам"
                        TextColor="White"
-                       FontSize="16"
-                       VerticalOptions="Center"/>
-
-                </Grid>
-
+                       FontSize="16"/>
             </Frame>
 
+            <!-- SHIPMENT REPORT -->
             <Frame Padding="20"
-               BackgroundColor="#1C1C26"
-               CornerRadius="10"
-               HasShadow="False">
+                   BackgroundColor="#1C1C26"
+                   CornerRadius="10"
+                   HasShadow="False">
 
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer />
+                    <TapGestureRecognizer Command="{Binding OpenShipmentReportCommand}" />
                 </Frame.GestureRecognizers>
 
-                <Grid ColumnDefinitions="*,Auto"
-                    VerticalOptions="Center">
-
-                    <Label Text="Отчёт по отгрузкам"
+                <Label Text="Отчёт по отгрузкам"
                        TextColor="White"
-                       FontSize="16"
-                       VerticalOptions="Center"/>
-
-                </Grid>
-
+                       FontSize="16"/>
             </Frame>
 
+            <!-- FINANCE REPORT -->
             <Frame Padding="20"
-               BackgroundColor="#1C1C26"
-               CornerRadius="10"
-               HasShadow="False">   
+                   BackgroundColor="#1C1C26"
+                   CornerRadius="10"
+                   HasShadow="False"
+                   IsVisible="{Binding Roles.Level3}">
 
                 <Frame.GestureRecognizers>
-                    <TapGestureRecognizer />
+                    <TapGestureRecognizer Command="{Binding OpenFinanceReportCommand}" />
                 </Frame.GestureRecognizers>
 
-                <Grid ColumnDefinitions="*,Auto"
-                    VerticalOptions="Center">
-
-                    <Label Text="Финансовый отчёт"
+                <Label Text="Финансовый отчёт"
                        TextColor="White"
-                       FontSize="16"
-                       VerticalOptions="Center"/>
-
-                </Grid>
-
+                       FontSize="16"/>
             </Frame>
-
 
         </VerticalStackLayout>
 
